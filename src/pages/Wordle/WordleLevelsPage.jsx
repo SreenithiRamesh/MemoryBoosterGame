@@ -93,9 +93,11 @@ const WordleLevelsPage = () => {
     <div className="wordle-levels-page">
       {/* Video Background */}
       <div className="video-background">
-        <video autoPlay loop muted playsInline>
-          <source src="https://ik.imagekit.io/ytissbwn8/12691871_1920_1080_30fps%20(1).mp4?updatedAt=1750657705495" type="video/mp4" />
-        </video>
+         <img 
+    src="/wordle_level_bg.jpg" 
+    alt="Background" 
+    className="background-image"
+  />
         <div className="overlay"></div>
       </div>
 

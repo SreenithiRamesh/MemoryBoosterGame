@@ -1,0 +1,552 @@
+:root {
+  --chess-primary-color: #6e00ff;
+  --chess-secondary-color: #ff00e4;
+  --chess-accent-color: #00f7ff;
+  --chess-dark-bg: #0f0f1a;
+  --chess-text-light: #ffffff;
+  --chess-text-muted: rgba(255, 255, 255, 0.7);
+  --chess-highlight: rgba(0, 247, 255, 0.5);
+  --chess-dark-square: #b58863;
+  --chess-light-square: #f0d9b5;
+}
+
+/* Theme classes */
+.chess-marble-theme {
+  --chess-light-square: #e8edf2;
+  --chess-dark-square: #b7c0d1;
+}
+
+.chess-dark-theme {
+  --chess-light-square: #7d7d7d;
+  --chess-dark-square: #2e2e2e;
+}
+
+.chess-neon-theme {
+  --chess-light-square: #0ff0fc;
+  --chess-dark-square: #9600ff;
+}
+
+/* Base Styles */
+.chess-container * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.chess-container {
+  position: relative;
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--chess-text-light);
+}
+
+.chess-bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Header */
+.chess-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chess-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, var(--chess-primary-color), var(--chess-secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.chess-game-modes {
+  display: flex;
+  gap: 1rem;
+}
+
+.chess-game-modes button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chess-game-modes button.active {
+  background: var(--chess-accent-color);
+  color: var(--chess-dark-bg);
+  font-weight: bold;
+}
+
+.chess-game-modes button:hover {
+  background: rgba(0, 247, 255, 0.3);
+}
+
+/* Game Area */
+.chess-game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.chess-player-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  background: rgba(15, 15, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.chess-player-info.active {
+  border-color: var(--chess-accent-color);
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+}
+
+.chess-player-info.winner {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: gold;
+}
+
+.chess-player-avatar {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.chess-player-avatar.chess-white {
+  color: white;
+}
+
+.chess-player-avatar.chess-black {
+  color: black;
+  text-shadow: 0 0 2px white;
+}
+
+.chess-timer-container {
+  flex-grow: 1;
+  margin: 0 1rem;
+}
+
+.chess-timer {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.chess-timer.low-time {
+  color: #ff5555;
+  animation: chess-pulse 1s infinite;
+}
+
+.chess-player-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.chess-player-meta h3 {
+  font-size: 1.1rem;
+}
+
+.chess-crown {
+  font-size: 1.5rem;
+  color: gold;
+}
+
+.chess-ai-thinking {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: var(--chess-accent-color);
+  font-style: italic;
+}
+
+.chess-chessboard-wrapper {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.chess-with-animations .chess-castle-animation {
+  animation: chess-castle 0.5s ease-out;
+}
+
+.chess-with-animations .chess-enpassant-animation {
+  animation: chess-enpassant 0.5s ease-out;
+}
+
+.chess-game-status-mobile {
+  display: none;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: var(--chess-accent-color);
+}
+
+/* Controls */
+.chess-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.chess-settings {
+  background: rgba(2, 0, 6, 0.461);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.404);
+  min-width: 300px;
+}
+
+.chess-setting-group {
+  margin-bottom: 1.5rem;
+}
+
+.chess-setting-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.chess-setting-group select {
+  width: 100%;
+  padding: 0.5rem;
+  background:  rgba(2, 0, 6, 0.461);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  color: white;
+}
+
+.chess-color-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chess-color-buttons button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chess-color-buttons button:hover {
+  opacity: 0.8;
+}
+
+.chess-new-game-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(45deg, var(--chess-primary-color), var(--chess-secondary-color));
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.chess-new-game-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(110, 0, 255, 0.4);
+}
+
+.chess-move-history-container {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  background: rgba(2, 0, 6, 0.461);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.404);
+}
+
+.chess-game-status-desktop {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--chess-accent-color);
+}
+
+.chess-move-history h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.chess-moves {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.chess-moves span {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+/* Promotion Modal */
+.chess-promotion-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.chess-promotion-options {
+  display: flex;
+  background: rgba(15, 15, 26, 0.9);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--chess-accent-color);
+}
+
+.chess-promotion-options img {
+  width: 60px;
+  height: 60px;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chess-promotion-options img:hover {
+  transform: scale(1.1);
+}
+
+/* Win Modal */
+.chess-win-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.chess-win-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.chess-win-modal-content {
+  position: relative;
+  background: rgba(15, 15, 26, 0.95);
+  border-radius: 15px;
+  padding: 3rem;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid rgba(0, 247, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.chess-win-modal-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(110, 0, 255, 0.1),
+    rgba(255, 0, 228, 0.1),
+    rgba(0, 247, 255, 0.1)
+  );
+  transform: rotate(30deg);
+  z-index: -1;
+}
+
+.chess-win-modal-content h2 {
+  margin-bottom: 2rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.chess-draw-details {
+  color: var(--chess-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+/* Victory Animation */
+.chess-css-crown-animation {
+  position: relative;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  height: 150px;
+}
+
+.chess-crown {
+  font-size: 4rem;
+  animation: chess-bounce 1s infinite alternate;
+}
+
+.chess-crown-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  margin-top: 1rem;
+  background: linear-gradient(to right, #ffd700, #ff8c00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: chess-pulse 1.5s infinite;
+}
+
+.chess-glitter-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: gold;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100;
+  animation: chess-glitter-fall 3s linear forwards;
+}
+
+/* Draw Animation */
+.chess-draw-animation {
+  margin-bottom: 2rem;
+}
+
+.chess-draw-animation h2 {
+  font-size: 2rem;
+  color: var(--chess-accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Puzzle Notification */
+.chess-puzzle-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 15, 26, 0.9);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: 1px solid var(--chess-accent-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/* Animations */
+@keyframes chess-bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+@keyframes chess-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes chess-glitter-fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes chess-castle {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes chess-enpassant {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chess-container {
+    padding: 1rem;
+  }
+  
+  .chess-game-area {
+    flex-direction: column;
+  }
+  
+  .chess-player-info {
+    max-width: 100%;
+  }
+  
+  .chess-chessboard-wrapper {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+  
+  .chess-game-status-desktop {
+    display: none;
+  }
+  
+  .chess-game-status-mobile {
+    display: block;
+  }
+  
+  .chess-controls {
+    flex-direction: column;
+  }
+  
+  .chess-settings, .chess-move-history-container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
