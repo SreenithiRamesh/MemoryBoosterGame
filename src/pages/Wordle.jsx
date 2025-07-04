@@ -5,6 +5,7 @@ import { getFeedback } from "../utils/getFeedback";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@react-hook/window-size";
 import { FaKeyboard, FaUndo, FaArrowLeft, FaTrophy } from "react-icons/fa";
+import './Wordle.css'
 
 // Sound Effects
 const successSound = new Audio("/sounds/success.mp3");
@@ -171,12 +172,12 @@ export default function Wordle() {
   return (
     <div className="wordle-game-page">
       {/* Video Background */}
-      {/* <div className="video-background">
+      <div className="video-background">
         <video autoPlay loop muted playsInline>
           <source src="https://ik.imagekit.io/ytissbwn8/12691871_1920_1080_30fps%20(1).mp4?updatedAt=1750657705495" type="video/mp4" />
         </video>
         <div className="overlay"></div>
-      </div> */}
+      </div>
 <div className="liquid-background">
   <div className="liquid-shape"></div>
   <div className="overlay"></div>

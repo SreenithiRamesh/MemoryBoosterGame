@@ -1,0 +1,523 @@
+/* Base Styles & Global Variables */
+:root {
+  --background-dark: #0F172A; /* Dark blue-gray for main background */
+  --background-light: #1E293B; /* Slightly lighter for elements */
+  --primary-accent: #6E00FF; /* Deep violet */
+  --secondary-accent: #FF00E4; /* Vibrant magenta */
+  --tertiary-accent: #00F7FF; /* Electric blue/cyan */
+  --text-light: #E2E8F0; /* Off-white for general text */
+  --text-dark: #0F172A; /* Dark text for light backgrounds */
+  --success-color: #00FFAB; /* Bright green for correct */
+  --warning-color: #FFC300; /* Amber for partial match */
+  --neutral-color: #6B7280; /* Gray for incorrect */
+  --border-radius-sm: 8px;
+  --border-radius-md: 15px;
+  --border-radius-lg: 50px;
+  --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --box-shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif; /* Modern, clean font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ /* Ensure body matches game page background */
+}
+
+/* Wordle Game Page Container */
+.wordle-game-page {
+  position: relative;
+  min-height: 100vh;
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Video/Image Background */
+.wordle-game-page .video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Below overlay */
+  opacity: 0.8;
+  overflow: hidden; /* Ensure image doesn't spill */
+}
+
+.wordle-game-page .background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire area */
+  filter: brightness(0.6); /* Darken the image for better text contrast */
+}
+
+.wordle-game-page .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 100%);
+  z-index: -1; /* Above image, below content */
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%; /* Adjusted padding */
+  z-index: 10; /* Ensure header is above game content */
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif; /* Futuristic font */
+  font-size: 2.2rem; /* Slightly larger */
+  font-weight: 700;
+  background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--tertiary-accent);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--tertiary-accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Game Container - MODIFIED */
+.wordle-game-container {
+  flex-grow: 1; /* Allows container to take available space */
+  max-width: 700px; /* Slightly reduced max-width for better focus */
+  margin: 2rem auto 4rem auto; /* Adjusted top/bottom margin */
+  padding: 0 1.5rem; /* Keep horizontal padding for content inside */
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  /* REMOVED: background, border, backdrop-filter, box-shadow from here */
+}
+
+/* Game Header (Level Info & Back Button) */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Take full width of parent */
+  margin-bottom: 2.5rem; /* More space below header */
+}
+
+.level-info-card {
+  background: rgba(30, 41, 59, 0.8); /* Use a slightly lighter dark background */
+  border-radius: var(--border-radius-md);
+  padding: 1.2rem 2rem; /* Adjusted padding */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly stronger border */
+  backdrop-filter: blur(12px); /* Increased blur */
+  box-shadow: var(--box-shadow-strong);
+  text-align: center;
+}
+
+.level-info-card h2 {
+  margin: 0;
+  font-size: 1.6rem; /* Slightly larger */
+  color: var(--tertiary-accent);
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 8px rgba(0, 247, 255, 0.5); /* Subtle glow */
+}
+
+.level-info-card p {
+  margin: 0.4rem 0 0;
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  font-size: 1rem;
+  color: #FFD700; /* Gold for trophy */
+  font-weight: 500;
+}
+
+.trophy-icon {
+  color: #FFD700;
+  font-size: 1.2rem;
+}
+
+.back-button {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid var(--tertiary-accent);
+  color: var(--tertiary-accent);
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--box-shadow-light);
+}
+
+.back-button:hover {
+  background: rgba(0, 247, 255, 0.2);
+  transform: translateY(-3px); /* More pronounced lift */
+  box-shadow: 0 6px 15px rgba(0, 247, 255, 0.3);
+}
+
+/* Game Board */
+.game-board {
+  margin-bottom: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.6rem; /* Reduced margin */
+}
+
+.tile {
+  width: 58px; /* Slightly adjusted size */
+  height: 58px;
+  margin: 4px;
+  line-height: 58px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.2rem; /* Larger font for letters */
+  border-radius: var(--border-radius-sm);
+  border: 2px solid var(--primary-accent);
+  background-color: rgba(15, 23, 42, 0.7); /* Slightly transparent dark background for individual tiles */
+  color: var(--text-light);
+  transition: all 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif; /* Consistent font */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Feedback Colors */
+.tile.green {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: var(--text-dark);
+  box-shadow: 0 0 18px var(--success-color); /* More intense glow */
+}
+
+.tile.yellow {
+  background-color: var(--warning-color);
+  border-color: var(--warning-color);
+  color: var(--text-dark);
+  box-shadow: 0 0 18px var(--warning-color);
+}
+
+.tile.gray {
+  background-color: var(--neutral-color);
+  border-color: var(--neutral-color);
+  color: var(--text-light);
+  box-shadow: 0 0 18px var(--neutral-color);
+}
+
+/* Input Area */
+.input-area {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically align items */
+  gap: 1.2rem; /* Increased gap */
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.input-area input {
+  padding: 0.9rem 1.5rem; /* Adjusted padding */
+  font-size: 1.1rem;
+  width: 250px; /* Fixed width */
+  text-align: center;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary-accent);
+  background: rgba(30, 41, 59, 0.8); /* Updated background for input */
+  color: var(--text-light);
+  outline: none;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--box-shadow-light);
+  transition: all 0.3s ease;
+}
+
+.input-area input::placeholder {
+  color: rgba(226, 232, 240, 0.6);
+}
+
+.input-area input:focus {
+  border-color: var(--tertiary-accent);
+  box-shadow: 0 0 15px var(--tertiary-accent);
+}
+
+.submit-btn {
+  padding: 0.9rem 2.2rem;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent));
+  color: var(--text-light);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--box-shadow-strong);
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, var(--secondary-accent), var(--primary-accent));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 0, 228, 0.4);
+}
+
+.submit-btn:disabled {
+  background: var(--neutral-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none;
+}
+
+/* On-Screen Keyboard */
+.keyboard {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.key {
+  flex-grow: 1;
+  padding: 12px 16px; /* Updated padding */
+  font-size: 16px;     /* Updated font size */
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;  /* Updated border radius */
+  background: linear-gradient(to right, #6C63FF, #00F5FF); /* New gradient */
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(108, 99, 255, 0.4); /* Soft purple shadow */
+  transition: transform 0.2s ease-in-out, background 0.3s ease;
+  min-width: 40px;
+  text-align: center;
+}
+
+.key:hover {
+  background: linear-gradient(to right, #C850C0, #6C63FF); /* New hover gradient */
+  transform: scale(1.1);
+}
+
+.key.enter,
+.key.backspace {
+  padding: 12px 20px;
+  font-size: 14px;
+  flex-grow: 0.5;
+  min-width: unset;
+}
+
+/* ─── Key Feedback Colours ─── */
+.key.green  {
+  background: #00FFAB;
+  color: #0F172A;
+  box-shadow: 0 0 10px #00FFAB;
+}
+
+.key.yellow {
+  background: #FFC300;
+  color: #0F172A;
+  box-shadow: 0 0 10px #FFC300;
+}
+
+.key.gray   {
+  background: #6B7280;
+  color: white;
+  box-shadow: 0 0 10px #6B7280;
+}
+
+
+/* Game Controls (Toggle Keyboard, Restart) */
+.game-controls {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.control-btn {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid var(--tertiary-accent);
+  color: var(--tertiary-accent);
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--box-shadow-light);
+}
+
+.control-btn:hover {
+  background: rgba(0, 247, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 247, 255, 0.3);
+}
+
+/* Status Messages */
+.game-messages {
+  margin-top: 2rem;
+  text-align: center;
+  min-height: 3rem; /* Reserve space to prevent layout shifts */
+}
+
+.countdown {
+  font-size: 1.3rem;
+  color: var(--tertiary-accent);
+  font-weight: 500;
+  animation: pulse 1.5s infinite; /* Added a subtle pulse animation */
+}
+
+.status-message {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: var(--text-light); /* Default color for messages */
+}
+
+/* Specific message colors */
+.status-message.success {
+  color: var(--success-color);
+  text-shadow: 0 0 10px var(--success-color);
+}
+
+.status-message.error {
+  color: var(--secondary-accent); /* Use magenta for error */
+  text-shadow: 0 0 10px var(--secondary-accent);
+}
+
+
+/* Animations */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Mobile-friendly tweaks */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 4%;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .wordle-game-container {
+    padding: 0 1rem;
+    margin: 1.5rem auto 3rem auto;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .level-info-card {
+    padding: 1rem 1.5rem;
+  }
+
+  .tile {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 1.8rem;
+    margin: 3px;
+  }
+
+  .input-area {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .input-area input {
+    width: 80%; /* Adjust width for mobile */
+  }
+
+  .submit-btn {
+    width: 80%;
+  }
+
+  .keyboard-row {
+    gap: 5px;
+  }
+
+  .key {
+    padding: 0.8rem 0.3rem;
+    font-size: 0.9rem;
+    min-width: 30px;
+  }
+
+  .key.enter,
+  .key.backspace {
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+  }
+}

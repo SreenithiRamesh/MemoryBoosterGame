@@ -1,0 +1,448 @@
+/* Chess Instructions Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  min-height: 100vh;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+.chessinstructioncontainer {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+}
+
+/* Header */
+.chessinstructionheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.chessinstructionlogo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.chessinstructionsettingsbtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chessinstructionsettingsbtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.chessinstructionsettingsicon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.chessinstructionsettingsbtn:hover .chessinstructionsettingsicon {
+  transform: rotate(90deg);
+}
+
+/* Main Content */
+.chessinstructionmaincontent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.chessinstructiontitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.chessinstructionsubtitle {
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+/* Instructions Grid */
+.chessinstructionsgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.chessinstructioncard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chessinstructioncard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd700, #ffed4a, #ffd700);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.chessinstructioncard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.chessinstructioncard:hover::before {
+  opacity: 1;
+}
+
+.chessinstructioncardicon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #1a1a2e;
+  font-weight: bold;
+}
+
+.chessinstructioncardtitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.chessinstructioncardtext {
+  color: #b0b0b0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Pieces Section */
+.chessinstructionpiecescontainer {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.chessinstructionpiecestitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.chessinstructionpiecesgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chessinstructionpiece {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.chessinstructionpiece:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.chessinstructionpieceicon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.chessinstructionpiecename {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.chessinstructionpiecedesc {
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  line-height: 1.4;
+}
+
+/* Action Buttons */
+.chessinstructionactions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.chessinstructionplaybtn {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+  border: none;
+  color: #1a1a2e;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.chessinstructionplaybtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.chessinstructionplaybtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+}
+
+.chessinstructionplaybtn:hover::before {
+  left: 100%;
+}
+
+/* Settings Modal */
+.chessinstructionsettingsmodal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.chessinstructionsettingsmodal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.chessinstructionsettingsmodal.show .chessinstructionsettingscontent {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.chessinstructionsettingscontent {
+  background: rgba(26, 26, 46, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  backdrop-filter: blur(20px);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.chessinstructionsettingsheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.chessinstructionsettingstitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.chessinstructionsettingsclose {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.chessinstructionsettingsclose:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.chessinstructionsettingsgroup {
+  margin-bottom: 1.5rem;
+}
+
+.chessinstructionsettingslabel {
+  display: block;
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.chessinstructionsettingsselect {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.chessinstructionsettingsselect:focus {
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.chessinstructionsettingsselect option {
+  background: #1a1a2e;
+  color: #ffffff;
+}
+
+.chessinstructionsettingscheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.chessinstructionsettingscheckbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #ffd700;
+}
+
+.chessinstructionsettingscheckbox label {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chessinstructionheader {
+    padding: 1.5rem 2rem;
+  }
+  
+  .chessinstructionlogo {
+    font-size: 2rem;
+  }
+  
+  .chessinstructiontitle {
+    font-size: 2.5rem;
+  }
+  
+  .chessinstructionsgrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .chessinstructionactions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .chessinstructionplaybtn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .chessinstructionpiecesgrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .chessinstructionsettingscontent {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chessinstructionpiecesgrid {
+    grid-template-columns: 1fr;
+  }
+}
