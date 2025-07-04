@@ -24,3 +24,5 @@ export const rtdb = getDatabase(app);     // Realtime DB (for leaderboard)
 
 // Optional: Analytics (remove if unused)
 // const analytics = getAnalytics(app);
+
+

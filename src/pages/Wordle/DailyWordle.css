@@ -1,0 +1,548 @@
+.daily-wordle-page {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Video Background */
+.daily-wordle-video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.daily-wordle-video-background video {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.daily-wordle-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(15, 15, 26, 0.9) 0%, rgba(15, 15, 26, 0.4) 100%);
+}
+
+/* Header */
+.daily-wordle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+  animation: fadeInDown 1s ease-out;
+}
+
+.daily-wordle-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.daily-wordle-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.daily-wordle-nav-link {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.daily-wordle-nav-link:hover {
+  color: var(--accent-color);
+}
+
+.daily-wordle-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.daily-wordle-nav-link:hover::after {
+  width: 100%;
+}
+
+.daily-wordle-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 5%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Game Header */
+.daily-wordle-game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  background: rgba(15, 15, 26, 0.7);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.daily-wordle-challenge-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.daily-wordle-challenge-info h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.daily-wordle-difficulty-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.daily-wordle-attempts-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+/* Game Board */
+.daily-wordle-game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 2rem 0;
+}
+
+.daily-wordle-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.daily-wordle-tile {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 2px solid rgba(111, 0, 255, 0.358);
+  border-radius: 10px;
+  background: rgba(30, 30, 40, 0.032);
+  color: white;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  backdrop-filter: blur(5px);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.daily-wordle-tile-filled {
+  border-color: #00f7ff;
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+  background: rgba(0, 247, 255, 0.1);
+  animation: tileFlip 0.5s ease;
+}
+
+.daily-wordle-tile-filled:last-of-type {
+  animation-delay: calc(var(--tile-index) * 0.1s);
+}
+
+/* Tile Colors */
+.daily-wordle-tile-gray {
+  background: rgba(107, 114, 128, 0.7) !important;
+  border-color: #6b7280 !important;
+  color: white;
+}
+
+.daily-wordle-tile-yellow {
+  background: rgba(234, 179, 8, 0.7) !important;
+  border-color: #eab308 !important;
+  color: white;
+}
+
+.daily-wordle-tile-green {
+  background: rgba(34, 197, 94, 0.7) !important;
+  border-color: #22c55e !important;
+  color: white;
+}
+
+/* Input Area */
+.daily-wordle-input-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.daily-wordle-input-area input {
+  padding: 12px;
+  font-size: 18px;
+  width: 200px;
+  text-align: center;
+  border-radius: 12px;
+  border: 2px solid rgba(107, 99, 255, 0.352);
+  background: rgba(30, 30, 40, 0.3);
+  color: white;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.daily-wordle-input-area input:focus {
+  border-color: #00F5FF;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+  background: rgba(30, 30, 40, 0.5);
+}
+
+.daily-wordle-input-area input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: normal;
+}
+
+.daily-wordle-submit-btn {
+  background: linear-gradient(45deg, #ff00e4, #9d00ff);
+  border: none;
+  color: white;
+  padding: 0.8rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 0, 228, 0.3);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.daily-wordle-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 0, 228, 0.4);
+}
+
+.daily-wordle-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Keyboard */
+/* Keyboard (Updated to match reference theme) */
+.daily-wordle-keyboard-container {
+  margin-top: 2rem;
+  padding: 0.5rem;
+  background: rgba(30, 30, 40, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 0 12px rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.daily-wordle-keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.daily-wordle-keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.daily-wordle-key {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(to right, #6C63FF, #00F5FF);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(108, 99, 255, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+
+.daily-wordle-key:hover {
+  background: linear-gradient(to right, #C850C0, #6C63FF);
+  transform: scale(1.1);
+}
+
+/* Key Feedback States */
+.daily-wordle-key-gray {
+  background: #6B7280 !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.daily-wordle-key-yellow {
+  background: #FFC300 !important;
+  color: #0F172A !important;
+}
+
+.daily-wordle-key-green {
+  background: #00FFAB !important;
+  color: #0F172A !important;
+}
+
+/* Special Keys */
+.daily-wordle-key-enter {
+  width: auto;
+  min-width: 4.5rem;
+  padding: 0 0.8rem;
+  font-size: 0.9rem;
+  background: linear-gradient(to right, #6C63FF, #00F5FF);
+}
+
+.daily-wordle-key-backspace {
+  width: auto;
+  min-width: 4.5rem;
+  padding: 0 0.8rem;
+  font-size: 0.9rem;
+  background: linear-gradient(to right, #C850C0, #6C63FF);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .daily-wordle-key {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 1rem;
+  }
+  
+  .daily-wordle-key-enter,
+  .daily-wordle-key-backspace {
+    min-width: 3.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .daily-wordle-keyboard-row {
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .daily-wordle-key {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .daily-wordle-key-enter,
+  .daily-wordle-key-backspace {
+    min-width: 3.2rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Game Controls */
+.daily-wordle-game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.daily-wordle-control-btn {
+  background: rgba(15, 15, 26, 0.7);
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.daily-wordle-control-btn:hover {
+  background: rgba(0, 247, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Status Messages */
+.daily-wordle-game-messages {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.daily-wordle-countdown {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.daily-wordle-status-message {
+  font-size: 1.1rem;
+  min-height: 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tileFlip {
+  0% { transform: rotateX(0); }
+  50% { transform: rotateX(90deg); }
+  100% { transform: rotateX(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.daily-wordle-row.invalid {
+  animation: shake 0.5s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .daily-wordle-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 5%;
+  }
+
+  .daily-wordle-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .daily-wordle-game-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .daily-wordle-input-area {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .daily-wordle-input-area input {
+    width: 100%;
+    max-width: 250px;
+    letter-spacing: 0.3rem;
+  }
+
+  .daily-wordle-submit-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .daily-wordle-key {
+    padding: 0.8rem 0.6rem;
+    min-width: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .daily-wordle-key-enter {
+    padding: 0.8rem 1rem;
+    min-width: 4rem;
+    font-size: 0.8rem;
+  }
+
+  .daily-wordle-key-backspace {
+    padding: 0.8rem 0.9rem;
+    min-width: 3.5rem;
+  }
+
+  .daily-wordle-game-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .daily-wordle-tile {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.6rem;
+  }
+
+  .daily-wordle-keyboard {
+    padding: 0.5rem;
+  }
+
+  .daily-wordle-keyboard-row {
+    gap: 0.3rem;
+  }
+
+  .daily-wordle-key {
+    padding: 0.7rem 0.5rem;
+    min-width: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .daily-wordle-key-enter {
+    padding: 0.7rem 0.8rem;
+    min-width: 3.5rem;
+  }
+
+  .daily-wordle-key-backspace {
+    padding: 0.7rem 0.7rem;
+    min-width: 3rem;
+  }
+}
