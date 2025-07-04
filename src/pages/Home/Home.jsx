@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './Home.css';
-import { FaBrain } from 'react-icons/fa';
+import { FaBrain, FaGamepad, FaChartLine, FaUsers, FaMedal, FaLock } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
@@ -12,25 +12,25 @@ const Home = () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-active');
+          entry.target.classList.add('home-animate-active');
         }
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+    document.querySelectorAll('.home-animate-on-scroll').forEach((el) => {
       observer.observe(el);
     });
 
     // Number counter animation
     const animateNumbers = () => {
-      const numberElements = document.querySelectorAll('.stat-number');
-
+      const numberElements = document.querySelectorAll('.home-stat-number');
+      
       numberElements.forEach(element => {
         const target = parseInt(element.getAttribute('data-target'));
         const duration = 2000;
         const start = 0;
         const increment = target / (duration / 16);
-
+        
         let current = start;
         const timer = setInterval(() => {
           current += increment;
@@ -43,7 +43,7 @@ const Home = () => {
       });
 
       // Animate progress bars
-      document.querySelectorAll('.progress-fill').forEach(bar => {
+      document.querySelectorAll('.home-progress-fill').forEach(bar => {
         const targetWidth = bar.parentElement.previousElementSibling.getAttribute('data-target') + '%';
         bar.style.width = targetWidth;
       });
@@ -59,46 +59,20 @@ const Home = () => {
       });
     }, { threshold: 0.5 });
 
-    document.querySelectorAll('.stat-card').forEach(card => {
+    document.querySelectorAll('.home-stat-card').forEach(card => {
       statsObserver.observe(card);
     });
-
-    // Game Icon floating animation (new observer)
-    const gameIconsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('floating-active');
-          gameIconsObserver.unobserve(entry.target); // Stop observing once animated
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.floating-game-icon').forEach((el) => {
-      gameIconsObserver.observe(el);
-    });
-
 
     return () => {
       observer.disconnect();
       statsObserver.disconnect();
-      gameIconsObserver.disconnect(); // Disconnect new observer
     };
   }, []);
-
-  // Define your game icons and their paths
-  const gameIcons = [
-    { id: 'logic', name: 'Logic Puzzles', iconSrc: '/images/icon-logic.png', link: '/games/logic' },
-    { id: 'memory', name: 'Memory Match', iconSrc: '/images/icon-memory.png', link: '/games/memory' },
-    { id: 'strategy', name: 'Strategy Challenges', iconSrc: '/images/icon-strategy.png', link: '/games/strategy' },
-    { id: 'word', name: 'Word Games', iconSrc: '/images/icon-word.png', link: '/games/word' },
-    { id: 'visual', name: 'Visual Perception', iconSrc: '/images/icon-visual.png', link: '/games/visual' },
-    { id: 'riddle', name: 'Riddles', iconSrc: '/images/icon-riddle.png', link: '/games/riddle' },
-  ];
 
   return (
     <div className="home-page">
       {/* Video Background */}
-      <div className="video-background">
+      <div className="home-video-background">
         <video autoPlay loop muted playsInline poster="/images/video-fallback.jpg">
           <source
             src="/videos/background-video.mp4"
@@ -110,176 +84,208 @@ const Home = () => {
             }}
           />
           Your browser does not support the video tag.
-        </video>
-        <div className="overlay"></div>
+        </video>
+        <div className="home-overlay"></div>
       </div>
+
       {/* Header */}
-      <header className="header">
-        <div className="logo">NEUROPLAY</div>
-        <nav className="nav">
-          <a href="#home" className="nav-link">Home</a>
-          <a href="/Games" className="nav-link">Games</a>
-          <a href="/login" className="nav-link">Login / Register</a>
+      <header className="home-header">
+        <div className="home-logo">NEUROPLAY</div>
+        <nav className="home-nav">
+          <a href="#home" className="home-nav-link">Home</a>
+          <a href="/Games" className="home-nav-link">Games</a>
          
+          <a href="/login" className="home-nav-link">Login / Register</a>
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main className="main-content">
-        <div className="hero-text animate-on-scroll">
-          <h1 className="title">SHARPEN YOUR MIND</h1>
-          <p className="subtitle">The Gym Membership Your Brain Deserves</p>
-          <button className="cta-button">EXPLORE MORE</button>
+      
+<section className="home-hero-section">
+  <main className="home-main-content">
+        <div className="home-hero-text home-animate-on-scroll">
+          <h1 className="home-title">SHARPEN YOUR MIND</h1>
+          <p className="home-subtitle">The Gym Membership Your Brain Deserves</p>
+          <button className="home-cta-button">EXPLORE MORE</button>
         </div>
+        </main>
+  
+  <div className="home-hero-image">
+    <div className="home-hero-image-background"></div>
+    <div className="home-floating-games">
+      {/* Wordle */}
+      <div className="home-floating-game home-wordle">
+        <div className="home-game-card-wrapper">
+          <img 
+            src="./wordle.png" 
+            alt="Wordle game" 
+            className="home-game-image"
+          />
+          <div className="home-game-label">Wordle</div>
+        </div>
+      </div>
+      
+      {/* Chess */}
+      <div className="home-floating-game home-chess">
+        <div className="home-game-card-wrapper">
+          <img 
+            src="./chess.jpg" 
+            alt="Chess game" 
+            className="home-game-image"
+          />
+          <div className="home-game-label">Chess</div>
+        </div>
+      </div>
+      
+      {/* Simon */}
+      <div className="home-floating-game home-simon">
+        <div className="home-game-card-wrapper">
+          <img 
+            src="./simon2.jpg" 
+            alt="Simon game" 
+            className="home-game-image"
+          />
+          <div className="home-game-label">Simon</div>
+        </div>
+      </div>
+      
+      {/* 2048 */}
+      <div className="home-floating-game home-game2048">
+        <div className="home-game-card-wrapper">
+          <img 
+            src="./20483.png" 
+            alt="2048 game" 
+            className="home-game-image"
+          />
+          <div className="home-game-label">2048</div>
+        </div>
+      </div>
+    </div>
+    
+    {/* Decorative elements */}
+    <div className="home-hero-decorations">
+      <div className="home-decoration-circle home-circle-1"></div>
+      <div className="home-decoration-circle home-circle-2"></div>
+      <div className="home-decoration-circle home-circle-3"></div>
+    </div>
+  </div>
+</section>
 
         {/* Brain Benefits Section */}
-        <section className="brain-benefits full-width-section">
-          <h2 className="section-title animate-on-scroll">YOUR BRAIN ON NEUROPLAY</h2>
+        <section className="home-brain-benefits home-full-width-section">
+          <h2 className="home-section-title home-animate-on-scroll">YOUR BRAIN ON NEUROPLAY</h2>
+          
 
-
-          <div className="animated-stats">
-            <div className="stat-card animate-on-scroll">
-              <div className="stat-number" data-target="87">0</div>
+          <div className="home-animated-stats">
+            <div className="home-stat-card home-animate-on-scroll">
+              <div className="home-stat-number" data-target="87">0</div>
               <p>Memory Retention</p>
-              <div className="progress-bar">
-                <div className="progress-fill" style={{ width: '87%' }}></div>
+              <div className="home-progress-bar">
+                <div className="home-progress-fill" style={{ width: '87%' }}></div>
               </div>
             </div>
-
-            <div className="stat-card animate-on-scroll">
-              <div className="stat-number" data-target="63">0</div>
+            
+            <div className="home-stat-card home-animate-on-scroll">
+              <div className="home-stat-number" data-target="63">0</div>
               <p>Focus Improvement</p>
-              <div className="progress-bar">
-                <div className="progress-fill" style={{ width: '63%' }}></div>
+              <div className="home-progress-bar">
+                <div className="home-progress-fill" style={{ width: '63%' }}></div>
               </div>
             </div>
-
-            <div className="stat-card animate-on-scroll">
-              <div className="stat-number" data-target="91">0</div>
+            
+            <div className="home-stat-card home-animate-on-scroll">
+              <div className="home-stat-number" data-target="91">0</div>
               <p>User Satisfaction</p>
-              <div className="progress-bar">
-                <div className="progress-fill" style={{ width: '91%' }}></div>
+              <div className="home-progress-bar">
+                <div className="home-progress-fill" style={{ width: '91%' }}></div>
               </div>
             </div>
           </div>
         </section>
-        <div className='animation'>
 
-
-          {/* Game Info Card */}
-          {/* <section className="">
-           
-          </section> */}
-
-          {/* <div className="game-card animate-on-scroll">
-            <h2>WORDLE CHALLENGE</h2>
-            <div className="game-details">
-              <p>Our scientifically-designed version of Wordle enhances:</p>
-              <ul>
-                <li>Vocabulary retention</li>
-                <li>Pattern recognition</li>
-                <li>Cognitive flexibility</li>
-                <li>Working memory</li>
-              </ul>
-              <div className="stats">
-                <div className="stat-item">
-                  <FaBrain className="stat-icon" />
-                  <span> +31% memory improvement</span>
-                </div>
+        {/* Features Section */}
+        <section className="home-features-section">
+          <h2 className="home-section-title home-animate-on-scroll">WHY CHOOSE NEUROPLAY?</h2>
+          <div className="home-features-grid">
+            <div className="home-feature-card home-animate-on-scroll">
+              <div className="home-feature-icon">
+                <FaBrain />
               </div>
-              <div className="rating">⭐⭐⭐⭐⭐ 4.9/5</div>
+              <h3>Science-Based Design</h3>
+              <p>Every game is crafted by neuroscientists using proven cognitive training methodologies to maximize brain improvement</p>
             </div>
-            <Link to="/wordle-levels" className="game-button">
-              PLAY NOW
-            </Link>
-          </div> */}
-        </div>
-      </main>
-
-      
-
-      {/* --- NEW SECTION: Game Explorer with Floating Icons --- */}
-      {/* <section className="game-explorer-section full-width-section">
-        <h2 className="section-title animate-on-scroll">EXPLORE OUR BRAIN GAMES</h2>
-        <p className="section-description animate-on-scroll">Dive into a world of challenges designed to boost your cognitive skills.</p>
-
-        <div className="floating-icons-container">
-          <div className="central-cta animate-on-scroll">
-            <h3>Find Your Game!</h3>
-            <p>Click an icon to learn more</p>
-            <Link to="/play" className="cta-button small-button">VIEW ALL GAMES</Link>
+            
+            <div className="home-feature-card home-animate-on-scroll">
+              <div className="home-feature-icon">
+                <FaGamepad />
+              </div>
+              <h3>Engaging Gameplay</h3>
+              <p>Experience addictive, fun games that make brain training feel like entertainment rather than work</p>
+            </div>
+            
+            <div className="home-feature-card home-animate-on-scroll">
+              <div className="home-feature-icon">
+                <FaChartLine />
+              </div>
+              <h3>Progress Tracking</h3>
+              <p>Monitor your cognitive improvement with detailed analytics and personalized insights into your brain training journey</p>
+            </div>
+            
+            <div className="home-feature-card home-animate-on-scroll">
+              <div className="home-feature-icon">
+                <FaUsers />
+              </div>
+              <h3>Community Challenges</h3>
+              <p>Compete with friends and join global leaderboards to stay motivated and challenge yourself against others</p>
+            </div>
+            
+            <div className="home-feature-card home-animate-on-scroll">
+              <div className="home-feature-icon">
+                <FaMedal />
+              </div>
+              <h3>Achievement System</h3>
+              <p>Unlock rewards, badges, and achievements as you progress through levels and reach new cognitive milestones</p>
+            </div>
+            
+            <div className="home-feature-card home-animate-on-scroll">
+              <div className="home-feature-icon">
+                <FaLock />
+              </div>
+              <h3>Secure & Private</h3>
+              <p>Your personal data and progress are protected with enterprise-grade security and privacy measures</p>
+            </div>
           </div>
-
-          {gameIcons.map((game, index) => (
-            <Link
-              to={game.link}
-              key={game.id}
-              className={`floating-game-icon icon-${game.id}`}
-              style={{ '--animation-delay': `${index * 0.15}s` }} // Staggered animation
-            >
-              <img src={game.iconSrc} alt={`${game.name} icon`} />
-              <span className="icon-name">{game.name}</span>
-            </Link>
-          ))}
-        </div>
-      </section> */}
-      {/* --- END NEW SECTION --- */}
+        </section>
 
       {/* Featured Games Section */}
-   <section className="featured-games">
-  <h2 className="section-title animate-on-scroll">FEATURED GAMES</h2>
-  <div className="game-grid">
-    {[
-      { 
-        id: 1, 
-        title: "Wordle", 
-        genre: "Word Puzzle", 
-        link: "/wordle-levels",
-        
-      },
-      { 
-        id: 2, 
-        title: "Chess", 
-        genre: "Strategy", 
-        link: "/Chess-game",
-       
-      },
-      { 
-        id: 3, 
-        title: "2048", 
-        genre: "Puzzle", 
-        link: "/flow2048",
-       
-      },
-      { 
-        id: 4, 
-        title: "Simon", 
-        genre: "Memory", 
-        link: "/simon-game", // Replace with your Simon game route when ready
-       
-      }
-    ].map((game) => (
-      <div key={game.id} className="game-tile animate-on-scroll">
-        <div className="game-image"></div>
-        <h3>{game.title}</h3>
-        <span className="game-genre">{game.genre}</span>
-        
-        <Link to={game.link} className="game-button">EXPLORE</Link>
-      </div>
-    ))}
-  </div>
-</section>
+      <section className="home-featured-games">
+        <h2 className="home-section-title home-animate-on-scroll">FEATURED GAMES</h2>
+        <div className="home-game-grid">
+          {[
+            { id: 1, title: "Neon Apocalypse", genre: "FPS" },
+            { id: 2, title: "Quantum Drift", genre: "Racing" },
+            { id: 3, title: "Shadow Legends", genre: "RPG" },
+            { id: 4, title: "Cyber Siege", genre: "Strategy" }
+          ].map((game) => (
+            <div key={game.id} className="home-game-tile home-animate-on-scroll">
+              <div className="home-game-tile-image"></div>
+              <h3>{game.title}</h3>
+              <span className="home-game-genre">{game.genre}</span>
+              <button className="home-game-button">EXPLORE</button>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Newsletter Section */}
-      <section className="newsletter animate-on-scroll">
+      <section className="home-newsletter home-animate-on-scroll">
         <h2>STAY UPDATED</h2>
         <p>Subscribe to our newsletter for the latest gaming news and exclusive offers</p>
-        <form className="newsletter-form">
+        <form className="home-newsletter-form">
           <input type="email" placeholder="Your email address" required />
           <button type="submit">SUBSCRIBE</button>
         </form>
       </section>
-
+      
       <Footer />
     </div>
   );
