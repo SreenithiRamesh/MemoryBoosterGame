@@ -256,19 +256,19 @@
 
 .home-chess {
   top: 20%;
-  right: 10%;
+  right: 15%;
   animation: float2 8s ease-in-out infinite 2s;
 }
 
 .home-simon {
-  bottom: 5%;
+  bottom:15%;
   left: 10%;
   animation: float3 8s ease-in-out infinite 4s;
 }
 
 .home-game2048 {
-  bottom: 5%;
-  right: 5%;
+  bottom: 10%;
+  right: 15%;
   animation: float4 8s ease-in-out infinite 6s;
 }
 

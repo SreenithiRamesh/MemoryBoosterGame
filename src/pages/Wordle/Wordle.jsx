@@ -9,11 +9,6 @@ import { FaKeyboard, FaUndo, FaArrowLeft, FaTrophy } from "react-icons/fa";
 import './Wordle.css'
 
 
-
-
-
-
-
 const successSound = new Audio("/sounds/success.mp3");
 const failSound = new Audio("/sounds/fail.mp3");
 const restartSound = new Audio("/sounds/restart.mp3");

@@ -289,18 +289,7 @@ const Flow2048 = () => {
         <div className="flow2048-control-panel">
           <button className="flow2048-control-btn" onClick={resetGame}>New Game</button>
           <button className="flow2048-control-btn" onClick={undoMove} disabled={undoStack.length < 2}>Undo</button>
-          <div className="flow2048-how-to-play">
-            <details>
-              <summary>How to Play</summary>
-              <ul>
-                <li>Use arrow keys to slide blocks</li>
-                <li>Combine identical numbers to double them</li>
-                <li>Reach {WINNING_VALUE} to win!</li>
-                <li>Press <kbd>Ctrl+Z</kbd> to undo</li>
-                <li>Swipe on the board to move blocks</li>
-              </ul>
-            </details>
-          </div>
+          
         </div>
 
         <div className="flow2048-game-board" {...handlers}>
