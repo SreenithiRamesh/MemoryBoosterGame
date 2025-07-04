@@ -4,7 +4,6 @@ import { FaBrain, FaGamepad, FaChartLine, FaUsers, FaMedal, FaLock } from 'react
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const Home = () => {
   useEffect(() => {
@@ -257,24 +256,51 @@ const Home = () => {
         </section>
 
       {/* Featured Games Section */}
-      <section className="home-featured-games">
-        <h2 className="home-section-title home-animate-on-scroll">FEATURED GAMES</h2>
-        <div className="home-game-grid">
-          {[
-            { id: 1, title: "Neon Apocalypse", genre: "FPS" },
-            { id: 2, title: "Quantum Drift", genre: "Racing" },
-            { id: 3, title: "Shadow Legends", genre: "RPG" },
-            { id: 4, title: "Cyber Siege", genre: "Strategy" }
-          ].map((game) => (
-            <div key={game.id} className="home-game-tile home-animate-on-scroll">
-              <div className="home-game-tile-image"></div>
-              <h3>{game.title}</h3>
-              <span className="home-game-genre">{game.genre}</span>
-              <button className="home-game-button">EXPLORE</button>
-            </div>
-          ))}
-        </div>
-      </section>
+     <section className="home-featured-games">
+  <h2 className="home-section-title home-animate-on-scroll">FEATURED GAMES</h2>
+  <div className="home-game-grid">
+    {[
+      {
+        id: 1,
+        title: "Wordle",
+        genre: "Vocabulary Puzzle",
+        path: "/wordle",
+        imageClass: "home-game-wordle"
+      },
+      {
+        id: 2,
+        title: "Chess",
+        genre: "Strategy Board Game",
+        path: "/chess-game",
+        imageClass: "home-game-chess"
+      },
+      {
+        id: 3,
+        title: "Simon Game",
+        genre: "Memory Challenge",
+        path: "/simon-game",
+        imageClass: "home-game-simon"
+      },
+      {
+        id: 4,
+        title: "2048",
+        genre: "Number Puzzle",
+        path: "/flow2048",
+        imageClass: "home-game-2048"
+      }
+    ].map((game) => (
+      <div key={game.id} className="home-game-tile home-animate-on-scroll">
+        <div className={`home-game-tile-image ${game.imageClass}`}></div>
+        <h3>{game.title}</h3>
+        <span className="home-game-genre">{game.genre}</span>
+        <a href={game.path}>
+          <button className="home-game-button">EXPLORE</button>
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Newsletter Section */}
       <section className="home-newsletter home-animate-on-scroll">

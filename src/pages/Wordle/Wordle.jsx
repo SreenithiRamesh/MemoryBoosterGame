@@ -4,11 +4,7 @@ import { getFeedback } from "../../utils/getFeedback";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@react-hook/window-size";
 import { FaKeyboard, FaUndo, FaArrowLeft, FaTrophy } from "react-icons/fa";
-<<<<<<< HEAD:src/pages/Wordle.jsx
 import './Wordle.css'
-=======
-import "./Wordle.css";
->>>>>>> f2ef577c6b881e157a2acfc76638506b1b044130:src/pages/Wordle/Wordle.jsx
 
 const successSound = new Audio("/sounds/success.mp3");
 const failSound = new Audio("/sounds/fail.mp3");
@@ -184,29 +180,7 @@ export default function Wordle() {
   };
 
   return (
-<<<<<<< HEAD:src/pages/Wordle.jsx
-    <div className="wordle-game-page">
-      {/* Video Background */}
-      <div className="video-background">
-        <video autoPlay loop muted playsInline>
-          <source src="https://ik.imagekit.io/ytissbwn8/12691871_1920_1080_30fps%20(1).mp4?updatedAt=1750657705495" type="video/mp4" />
-        </video>
-        <div className="overlay"></div>
-      </div>
-<div className="liquid-background">
-  <div className="liquid-shape"></div>
-  <div className="overlay"></div>
-</div>
-      {/* Header */}
-      <header className="header">
-        <div className="logo">NEUROPLAY</div>
-        <nav className="nav">
-          <a href="/" className="nav-link">Home</a>
-          <a href="/wordle-levels" className="nav-link">Games</a>
-          <a href="#benefits" className="nav-link">Benefits</a>
-          <a href="#community" className="nav-link">Community</a>
-          <a href="#contact" className="nav-link">Contact</a>
-=======
+
     <div className="wordle-page">
       <div className="wordle-background">
         <img 
@@ -225,7 +199,7 @@ export default function Wordle() {
           <a href="#benefits" className="wordle-nav-link">Benefits</a>
           <a href="#community" className="wordle-nav-link">Community</a>
           <a href="#contact" className="wordle-nav-link">Contact</a>
->>>>>>> f2ef577c6b881e157a2acfc76638506b1b044130:src/pages/Wordle/Wordle.jsx
+
         </nav>
       </header>
 
