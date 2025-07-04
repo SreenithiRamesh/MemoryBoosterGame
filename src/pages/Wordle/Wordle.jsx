@@ -4,11 +4,15 @@ import { getFeedback } from "../../utils/getFeedback";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@react-hook/window-size";
 import { FaKeyboard, FaUndo, FaArrowLeft, FaTrophy } from "react-icons/fa";
+<<<<<<< HEAD
 
 import './Wordle.css'
 
 
 
+=======
+import './Wordle.css'
+>>>>>>> 008d71271703d15f797b04767a8d37827f2617fc
 
 const successSound = new Audio("/sounds/success.mp3");
 const failSound = new Audio("/sounds/fail.mp3");
