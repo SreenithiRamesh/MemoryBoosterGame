@@ -249,7 +249,7 @@
 
 .home-chess {
   top: 20%;
-  right: 10%;
+  right: 20%;
   animation: float2 8s ease-in-out infinite 2s;
 }
 
@@ -261,7 +261,7 @@
 
 .home-game2048 {
   bottom: 5%;
-  right: 10%;
+  right: 20%;
   animation: float4 8s ease-in-out infinite 6s;
 }
 
