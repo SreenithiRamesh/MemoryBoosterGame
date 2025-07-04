@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Settings, Play, Gamepad2 } from 'lucide-react';
 import './SimonInstruction.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const SimonInstruction = () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -48,11 +50,11 @@ const SimonInstruction = () => {
       return () => clearInterval(interval);
     }
   }, [demoSequence]);
+const navigate = useNavigate();
 
-  const handlePlayClick = () => {
-    // Navigate to Simon game
-    console.log('Navigate to Simon game');
-  };
+const handlePlayClick = () => {
+  navigate('/simon-game');
+};
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
@@ -83,7 +85,8 @@ const SimonInstruction = () => {
         </header>
 
         <main className="simon-main-content">
-          <div className="simon-game-preview">
+          <div className='simon-game-preview-container'>
+ <div className="simon-game-preview">
             <div className="game-theme-container">
               <div className="energy-core">
                 <div className="core-inner">
@@ -119,8 +122,18 @@ const SimonInstruction = () => {
                   <div className="bar bar-5"></div>
                 </div>
               </div>
-            </div>
+            </div>  
           </div>
+<div className="simon-actions">
+      <button className="simon-play-btn" onClick={handlePlayClick}>
+        <Play size={20} />
+        Start Playing
+      </button>
+    </div>
+
+          </div>
+         
+
 
           <div className="simon-instructions">
             <h2>How to Play</h2>
@@ -154,15 +167,7 @@ const SimonInstruction = () => {
             </div>
           </div>
 
-          <div className="simon-actions">
-            <button 
-              className="simon-play-btn"
-              onClick={handlePlayClick}
-            >
-              <Play size={20} />
-              Start Playing
-            </button>
-          </div>
+         
         </main>
 
         {showSettings && (

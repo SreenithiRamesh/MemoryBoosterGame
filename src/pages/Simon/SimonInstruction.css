@@ -60,9 +60,8 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 20px 0;
-          border-bottom: 2px solid rgba(0, 247, 255, 0.3);
-          margin-bottom: 40px;
+          padding: 10px 0;
+         
         }
 
         .simon-logo {
@@ -107,12 +106,12 @@
           box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
         }
 
-        .simon-main-content {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 40px;
-          align-items: start;
-        }
+       .simon-main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
 
         .simon-game-preview {
           display: flex;
@@ -121,7 +120,12 @@
           padding: 60px;
           position: relative;
         }
-
+.simon-game-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
         .game-theme-container {
           position: relative;
           width: 350px;
@@ -489,6 +493,7 @@
         .simon-game-rules ul {
           list-style: none;
           padding: 0;
+          text-align: start;
         }
 
         .simon-game-rules li {
@@ -507,13 +512,11 @@
           font-size: 0.8rem;
         }
 
-        .simon-actions {
-          grid-column: 1 / -1;
-          display: flex;
-          justify-content: center;
-          margin-top: 40px;
-        }
-
+       .simon-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0; /* Remove the previous margin-top */
+}
         .simon-play-btn {
           background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
           border: none;
@@ -668,6 +671,12 @@
             font-size: 2rem;
           }
           
+  .simon-game-preview-container {
+    order: 1;
+  }
+  
+  .simon-instructions {
+    order: 2;}
           .game-theme-container {
             width: 280px;
             height: 280px;

@@ -1,11 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
 /* Base styles */
 .simon-game {
   min-height: 100vh;
-  background-color: #111827;
+  background: linear-gradient(to right top, #0f0c29, #302b63, #24243e);
+  background-attachment: fixed;
   color: white;
+  font-family: 'Montserrat', sans-serif;
   position: relative;
   overflow: hidden;
 }
+
+.simon-pulse-circle-1,
+.simon-pulse-circle-2,
+.simon-pulse-circle-3 {
+  filter: blur(3rem);
+  opacity: 0.6;
+}
+
 
 /* Background elements */
 .simon-animated-background {
@@ -100,13 +112,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #374151;
-  position: relative;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 10;
+  border-radius: 1rem;
 }
+.simon-mode-toggle-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background-color: #1e293b;
+  border: 1px solid #4b5563;
+  border-radius: 9999px;
+  color: #38bdf8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.simon-mode-toggle-header:hover {
+  background-color: #334155;
+}
+
 
 .simon-score-container {
   display: flex;
@@ -176,20 +206,22 @@
   min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .simon-game-title {
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 2rem;
+
 }
 
 .simon-game-title h1 {
-  font-size: 3.75rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  font-family: monospace;
-  letter-spacing: 0.1em;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00e0ff;
 }
 
 .simon-simon-text {
@@ -200,8 +232,11 @@
 }
 
 .simon-says-text {
-  color: white;
+background: linear-gradient(to right, #22d3ee, #3b82f6);
   margin-left: 1rem;
+ -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .simon-game-subtitle {
