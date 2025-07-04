@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import React, { useEffect } from 'react';
 import './Home.css';
 import { FaBrain, FaGamepad, FaChartLine, FaUsers, FaMedal, FaLock } from 'react-icons/fa';
@@ -294,4 +293,4 @@ const Home = () => {
 };
 
 export default Home;
->>>>>>> 1814545398e4d1491a1ced851e766ed4ac1e9bdf
+
