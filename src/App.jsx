@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
+
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+
 import Wordle from "./pages/Wordle/Wordle";
 import WordleLevelsPage from "./pages/Wordle/WordleLevelsPage";
 import DailyWordle from "./pages/Wordle/DailyWordle"; // New import for Daily Challenge
@@ -14,7 +13,6 @@ import Gamelisting from "./pages/Gamelisting/Gamelisting";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
 
 
-import Demo from "./pages/Demo/Demo";
 
 
 // import NotFound from "./pages/NotFound"; // Recommended for 404 handling
@@ -26,9 +24,9 @@ export default function App() {
       <Routes>
         {/* Main Routes */}
         <Route path="/" element={<Home />} />
-         <Route path="/h" element={<Demo/>} />
+     
         <Route path="/login" element={<LoginRegister/>} />
-        <Route path="/register" element={<Register />} />
+      
            <Route path="/Games" element={<Gamelisting/>} />
 
         {/* Wordle Game Routes */}
