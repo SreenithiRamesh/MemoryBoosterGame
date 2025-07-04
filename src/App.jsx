@@ -8,10 +8,13 @@ import WordleLevelsPage from "./pages/Wordle/WordleLevelsPage";
 import DailyWordle from "./pages/Wordle/DailyWordle"; // New import for Daily Challenge
 import DailyLeaderboard from "./pages/Wordle/DailyLeaderboard";
 import ChessGame from "./pages/ChessGame/ChessGame";
-import SimonGame from "./pages/SimonGame/SimonGame";
+import SimonGame from "./pages/Simon/SimonGame";
 import Flow2048 from "./pages/Flow2048/Flow2048";
 import Gamelisting from "./pages/Gamelisting/Gamelisting";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
+import SimonInstruction from "./pages/Simon/SimonInstruction";
+import Game2048Instructions from "./pages/2048/2048Instructions";
+
 
 
 
@@ -41,6 +44,10 @@ export default function App() {
 
  {/* FlowFree Game */}
  <Route path="/simon-game" element={<SimonGame/>}/>
+        <Route path="/simon-instruction" element={<SimonInstruction />} />
+        <Route path="/game2048-instructions" element={<Game2048Instructions />} />
+
+        {/* Flow2048 Game */}
 
 <Route path="/flow2048" element={<Flow2048/>} />
 
