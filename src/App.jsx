@@ -14,6 +14,8 @@ import Gamelisting from "./pages/Gamelisting/Gamelisting";
 import LoginRegister from "./pages/LoginRegister/LoginRegister";
 import SimonInstruction from "./pages/Simon/SimonInstruction";
 import Game2048Instructions from "./pages/2048/2048Instructions";
+import ChessInstructions from "./pages/Chess/ChessInstruction";
+import WordleInstruction from "./pages/Wordle/WordleInstructions";
 
 
 
@@ -46,6 +48,8 @@ export default function App() {
  <Route path="/simon-game" element={<SimonGame/>}/>
         <Route path="/simon-instruction" element={<SimonInstruction />} />
         <Route path="/game2048-instructions" element={<Game2048Instructions />} />
+        <Route path="/chess-instructions" element={<ChessInstructions />} />
+        <Route path="/wordle-instructions" element={<WordleInstruction />} />
 
         {/* Flow2048 Game */}
 
