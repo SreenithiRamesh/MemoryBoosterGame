@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, Play, Gamepad2 } from 'lucide-react';
+import { Settings, Play, Gamepad2, ArrowLeft } from 'lucide-react';
 import './SimonInstruction.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,10 @@ const SimonInstruction = () => {
   // Colors for the Simon game
   const colors = ['red', 'green', 'blue', 'yellow'];
   
+  const handleBackClick = () => {
+  navigate(-1); // Go back to the previous page
+};
+
   // Generate demo sequence
   useEffect(() => {
     const sequence = [];
@@ -70,19 +74,28 @@ const handlePlayClick = () => {
       
       
       <div className="simon-container">
-        <header className="simon-header">
-          <div className="simon-logo">
-            <Gamepad2 size={40} color="var(--accent-color)" />
-            <h1>Simon Game</h1>
-          </div>
-          <button 
-            className="simon-settings-btn"
-            onClick={toggleSettings}
-            aria-label="Settings"
-          >
-            <Settings size={24} />
-          </button>
-        </header>
+       <header className="simon-header">
+  <div className="simon-logo">
+    <Gamepad2 size={40} color="var(--accent-color)" />
+    <h1>Simon Game</h1>
+  </div>
+  <div style={{ display: 'flex', gap: '10px' }}>
+    <button
+      className="simon-back-btn"
+      onClick={handleBackClick}
+      aria-label="Back"
+    >
+      <ArrowLeft size={20} />
+    </button>
+    <button
+      className="simon-settings-btn"
+      onClick={toggleSettings}
+      aria-label="Settings"
+    >
+      <Settings size={24} />
+    </button>
+  </div>
+</header>
 
         <main className="simon-main-content">
           <div className='simon-game-preview-container'>

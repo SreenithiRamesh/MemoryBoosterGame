@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, Play, Volume2, VolumeX } from 'lucide-react';
+import { Settings, Play, Volume2, VolumeX, ArrowLeft } from 'lucide-react'; // ADD ArrowLeft
+import { useNavigate } from 'react-router-dom';
+
 import './WordleInstructions.css';
 
 const WordleInstruction = () => {
@@ -24,10 +26,12 @@ const WordleInstruction = () => {
     
     setFloatingLetters(newFloatingLetters);
   }, []);
+const navigate = useNavigate();
 
-  const handlePlayClick = () => {
-    console.log('Navigate to Wordle game');
-  };
+ const handlePlayClick = () => {
+  navigate('/wordle-levels');
+};
+
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
@@ -70,18 +74,29 @@ const WordleInstruction = () => {
       </div>
 
       <div className="htpw-container">
-        <header className="htpw-header">
-          <div className="htpw-logo">
-            <h1>Wordle</h1>
-          </div>
-          <button 
-            className="htpw-settings-btn"
-            onClick={toggleSettings}
-            aria-label="Settings"
-          >
-            <Settings size={24} />
-          </button>
-        </header>
+       <header className="htpw-header">
+  <div className="htpw-logo">
+    <h1>Wordle</h1>
+  </div>
+
+  <div style={{ display: 'flex', gap: '10px' }}>
+    <button 
+      className="htpw-settings-btn"
+      onClick={() => navigate('/Games')}
+      aria-label="Back"
+    >
+      <ArrowLeft size={20} />
+    </button>
+    <button 
+      className="htpw-settings-btn"
+      onClick={toggleSettings}
+      aria-label="Settings"
+    >
+      <Settings size={24} />
+    </button>
+  </div>
+</header>
+
 
         <main className="htpw-main-content">
           {/* Left Side - Animation and Play Button */}
@@ -126,9 +141,10 @@ const WordleInstruction = () => {
           {/* Right Side - Instructions */}
           <div className="htpw-right-section">
             <div className="htpw-instructions">
-              <h2>How to Play</h2>
+             
               
               <div className="htpw-quick-guide">
+                 <h2>How to Play</h2>
                 <p>Guess the 5-letter word in 6 tries!</p>
                 
                 <div className="htpw-color-guide">

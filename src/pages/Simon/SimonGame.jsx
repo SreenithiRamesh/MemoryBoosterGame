@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, RotateCcw, Play, Zap, Shield } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
 import './SimonGame.css';
 
 const SimonGame = () => {
@@ -49,6 +52,9 @@ const SimonGame = () => {
     oscillator.start();
     oscillator.stop(audioContext.current.currentTime + duration / 1000);
   };
+
+  const navigate = useNavigate();
+const handleBack = () => navigate(-1);
 
   const playErrorSound = () => {
     if (!soundEnabled || !audioContext.current) return;
@@ -184,18 +190,39 @@ const SimonGame = () => {
               <span className="simon-level-value">{level}</span>
             </div>
           </div>
+          <div className="simon-mode-toggle-wrapper">
           <div className="simon-mode-toggle-header" onClick={() => selectGameMode(gameMode === 'normal' ? 'strict' : 'normal')}>
             {gameMode === 'strict' ? <Zap size={16} style={{ color: '#f87171' }} /> : <Shield size={16} style={{ color: '#4ade80' }} />}
             {gameMode === 'strict' ? 'Strict Mode' : 'Normal Mode'}
+          </div>
           </div>
           <div className="simon-score-container">
             <div className="simon-score-item">
               <span className="simon-high-score-label">High Score:</span>
               <span className="simon-high-score-value">{highScore}</span>
             </div>
-            <button onClick={() => setSoundEnabled(!soundEnabled)} className="simon-sound-toggle">
-              {soundEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
-            </button>
+           <div style={{ display: 'flex', gap: '0.5rem' }}>
+  <button className="simon-back-button  " onClick={handleBack} aria-label="Back">
+    <ArrowLeft size={18} />
+  </button>
+  <button onClick={() => setSoundEnabled(!soundEnabled)} className="simon-sound-toggle">
+    {soundEnabled ? <Volume2 size={20} /> : <VolumeX size={20} />}
+  </button>
+  <div className="simon-header-controls desktop-only">
+  {!gameStarted || gameOver ? (
+    <button onClick={startGame} className="simon-icon-circle" aria-label="Start">
+      <Play size={18} />
+    </button>
+  ) : (
+    <button onClick={resetGame} className="simon-icon-circle" aria-label="Reset">
+      <RotateCcw size={18} />
+    </button>
+  )}
+</div>
+</div>
+
+
+
           </div>
         </header>
         <main>
@@ -227,17 +254,18 @@ const SimonGame = () => {
               })}
             </div>
           </div>
-          <div className="simon-controls">
-            {!gameStarted || gameOver ? (
-              <button onClick={startGame} className="simon-control-button simon-start-button">
-                <Play size={24} /> <span>{gameStarted ? 'Play Again' : 'Start Game'}</span>
-              </button>
-            ) : (
-              <button onClick={resetGame} className="simon-control-button simon-reset-button">
-                <RotateCcw size={24} /> <span>Reset</span>
-              </button>
-            )}
-          </div>
+         <div className="simon-controls mobile-only">
+  {!gameStarted || gameOver ? (
+    <button onClick={startGame} className="simon-control-button simon-start-button">
+      <Play size={24} /> <span>{gameStarted ? 'Play Again' : 'Start Game'}</span>
+    </button>
+  ) : (
+    <button onClick={resetGame} className="simon-control-button simon-reset-button">
+      <RotateCcw size={24} /> <span>Reset</span>
+    </button>
+  )}
+</div>
+
         </main>
       </div>
     </div>

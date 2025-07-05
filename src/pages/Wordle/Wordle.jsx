@@ -198,10 +198,8 @@ export default function Wordle() {
         <div className="wordle-logo">NEUROPLAY</div>
         <nav className="wordle-nav">
           <a href="/" className="wordle-nav-link">Home</a>
-          <a href="/wordle-levels" className="wordle-nav-link">Games</a>
-          <a href="#benefits" className="wordle-nav-link">Benefits</a>
-          <a href="#community" className="wordle-nav-link">Community</a>
-          <a href="#contact" className="wordle-nav-link">Contact</a>
+          <a href="/Games" className="wordle-nav-link">Games</a>
+         
 
         </nav>
       </header>

@@ -89,22 +89,48 @@
         }
 
         .simon-settings-btn {
-          background: rgba(0, 247, 255, 0.1);
-          border: 2px solid var(--accent-color);
-          color: var(--accent-color);
-          padding: 12px;
-          border-radius: 50%;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          backdrop-filter: blur(10px);
-        }
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 247, 255, 0.1);
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
 
-        .simon-settings-btn:hover {
-          background: rgba(0, 247, 255, 0.2);
-          border-color: var(--accent-color);
-          transform: rotate(90deg);
-          box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
-        }
+.simon-settings-btn:hover {
+  background: rgba(0, 247, 255, 0.2);
+  border-color: var(--accent-color);
+  transform: rotate(90deg);
+  box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+}
+
+        .simon-back-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(157, 0, 255, 0.1);
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.simon-back-btn:hover {
+  background: rgba(157, 0, 255, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 0, 228, 0.4);
+}
+
 
        .simon-main-content {
   display: grid;

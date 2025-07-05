@@ -155,9 +155,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 2px solid rgba(110, 0, 255, 0.3);
-  margin-bottom: 40px;
+  padding: 10px 0;
+
+
+}
+.htpw-back-btn {
+  background: rgba(0, 247, 255, 0.15);
+  border: 2px solid var(--htpw-neon-blue);
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.htpw-back-btn:hover {
+  background: rgba(0, 247, 255, 0.3);
+  border-color: var(--htpw-neon-blue);
+  transform: translateX(-2px);
+  box-shadow: 0 0 20px var(--htpw-neon-blue);
 }
 
 .htpw-logo h1 {
@@ -169,14 +186,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
-  text-shadow: 0 0 30px var(--htpw-neon-blue);
+  text-shadow: 0 0 90px var(--htpw-neon-blue);
 }
 
 .htpw-settings-btn {
   background: rgba(110, 0, 255, 0.2);
   border: 2px solid var(--htpw-primary-color);
   color: var(--htpw-text-light);
-  padding: 12px;
+  padding: 8px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -316,7 +333,7 @@
   border: none;
   color: white;
   padding: 20px 40px;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   font-family: 'Orbitron', monospace;
   border-radius: 50px;
@@ -358,7 +375,7 @@
 .htpw-instructions h2 {
   font-family: 'Orbitron', monospace;
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: var(--htpw-neon-blue);
   text-align: center;
   text-shadow: 0 0 20px var(--htpw-neon-blue);

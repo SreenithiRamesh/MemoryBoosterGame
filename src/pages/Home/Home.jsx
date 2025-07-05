@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
 
+
 const Home = () => {
   useEffect(() => {
     // Main Intersection Observer for scroll animations
@@ -19,6 +20,7 @@ const Home = () => {
     document.querySelectorAll('.home-animate-on-scroll').forEach((el) => {
       observer.observe(el);
     });
+// const navigate = useNavigate();
 
     // Number counter animation
     const animateNumbers = () => {
@@ -104,7 +106,9 @@ const Home = () => {
         <div className="home-hero-text home-animate-on-scroll">
           <h1 className="home-title">SHARPEN YOUR MIND</h1>
           <p className="home-subtitle">The Gym Membership Your Brain Deserves</p>
-          <button className="home-cta-button">EXPLORE MORE</button>
+         <Link to="/Games" className="home-cta-button">
+  PLAY NOW
+</Link>
         </div>
         </main>
   
@@ -294,7 +298,7 @@ const Home = () => {
         <h3>{game.title}</h3>
         <span className="home-game-genre">{game.genre}</span>
         <a href={game.path}>
-          <button className="home-game-button">EXPLORE</button>
+          <button className="home-game-button">PLAY NOW</button>
         </a>
       </div>
     ))}
