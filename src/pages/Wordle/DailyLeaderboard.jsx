@@ -40,14 +40,12 @@ export default function DailyLeaderboard() {
       </div>
 
       {/* Header */}
-      <header className="header">
+      <header className="l-header">
         <div className="logo">NEUROPLAY</div>
-        <nav className="nav">
-          <a href="/" className="nav-link">Home</a>
-          <a href="/wordle-levels" className="nav-link">Games</a>
-          <a href="#benefits" className="nav-link">Benefits</a>
-          <a href="#community" className="nav-link">Community</a>
-          <a href="#contact" className="nav-link">Contact</a>
+        <nav className="l-nav">
+          <a href="/" className="l-nav-link">Home</a>
+          <a href="/wordle-levels" className="l-nav-link">Games</a>
+    
         </nav>
       </header>
 

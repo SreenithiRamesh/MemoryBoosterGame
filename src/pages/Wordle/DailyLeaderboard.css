@@ -6,6 +6,26 @@
   overflow-x: hidden;
 }
 
+.l-nav-link{
+color: var(--text-light);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+.l-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.l-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+  animation: fadeInDown 1s ease-out;
+}
 /* Video Background */
 .leaderboard-page .video-background {
   position: fixed;
