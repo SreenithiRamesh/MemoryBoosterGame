@@ -1,396 +1,3 @@
-/* .wordle-levels-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.progress-tracker {
-  background: rgba(15, 15, 26, 0.7);
-  padding: 1.5rem;
-  border-radius: 15px;
-  margin-bottom: 2rem;
-}
-
-.progress-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.progress-label {
-  width: 80px;
-  font-weight: 600;
-}
-
-.progress-bar {
-  flex-grow: 1;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  margin: 0 1rem;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  transition: width 0.5s ease;
-}
-
-.progress-count {
-  width: 60px;
-  text-align: right;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.category-card {
-  background: rgba(15, 15, 26, 0.7);
-  border-radius: 15px;
-  padding: 1.5rem;
-  border: 2px solid;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-}
-
-.category-card.locked {
-  filter: brightness(0.6);
-}
-
-.lock-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.levels-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 0.5rem;
-  margin: 1.5rem 0;
-}
-
-.level-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.2s ease;
-}
-
-.level-dot.completed {
-  transform: scale(1.1);
-  box-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
-}
-
-.level-dot:hover {
-  transform: scale(1.2);
-}
-
-.play-button {
-  width: 100%;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.play-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-} */
-
-/* Responsive */
-/* 
-@media (max-width: 768px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .levels-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  
-  .progress-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .progress-bar {
-    width: 100%;
-    margin: 0.5rem 0;
-  }
-}
-
-
-.wordle-levels-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  position: relative;
-}
-
-/* Daily Challenge Banner */
-/* 
-.daily-challenge-banner {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.daily-challenge-banner:hover {
-  transform: translateY(-3px);
-}
-
-.daily-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.daily-content h3 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.daily-content p {
-  margin: 0.2rem 0 0;
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-
-.daily-play-button {
-  background: white;
-  color: #2575fc;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.daily-play-button:hover {
-  background: #f8f8f8;
-  transform: scale(1.05);
-} */
-
-/* Floating Daily Challenge Button */
-/* 
-.floating-daily-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-  transition: all 0.3s ease;
-}
-
-.floating-daily-btn:hover {
-  transform: scale(1.1) translateY(-5px);
-}
-
-.floating-daily-btn svg {
-  font-size: 1.5rem;
-} */
-
-/* Rest of your existing styles */
-/* 
-.progress-tracker {
-  background: rgba(15, 15, 26, 0.7);
-  padding: 1.5rem;
-  border-radius: 15px;
-  margin-bottom: 2rem;
-}
-
-.progress-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.progress-label {
-  width: 80px;
-  font-weight: 600;
-}
-
-.progress-bar {
-  flex-grow: 1;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  margin: 0 1rem;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  transition: width 0.5s ease;
-}
-
-.progress-count {
-  width: 60px;
-  text-align: right;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.category-card {
-  background: rgba(15, 15, 26, 0.7);
-  border-radius: 15px;
-  padding: 1.5rem;
-  border: 2px solid;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-} */
-
-/* .category-card.locked {
-  filter: brightness(0.6);
-}
-
-.lock-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.levels-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 0.5rem;
-  margin: 1.5rem 0;
-}
-
-.level-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.2s ease;
-}
-
-.level-dot.completed {
-  transform: scale(1.1);
-  box-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
-}
-
-.level-dot:hover {
-  transform: scale(1.2);
-}
-
-.play-button {
-  width: 100%;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.play-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}  */
-
-/* Responsive */
-/* 
-@media (max-width: 768px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .levels-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  
-  .progress-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .progress-bar {
-    width: 100%;
-    margin: 0.5rem 0;
-  }
-
-  .floating-daily-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-  }
-} */
-
-
 
 .wordle-levels-page {
   position: relative;
@@ -722,4 +329,142 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   z-index: 100;
   transition: all 0;
+}
+
+@media (max-width: 420px) {
+  /* Header adjustments */
+  .wordle-levels-page .header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wordle-levels-page .logo {
+    font-size: 1.5rem;
+  }
+
+  .wordle-levels-page .nav {
+    gap: 1rem;
+  }
+
+  /* Container adjustments */
+  .wordle-levels-container {
+    padding: 1rem;
+  }
+
+  /* Daily Challenge Banner */
+  .daily-challenge-banner {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .daily-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .daily-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .daily-play-button {
+    width: 100%;
+    padding: 0.7rem;
+  }
+
+  /* Page title */
+  .page-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Progress tracker */
+  .progress-tracker {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .progress-label {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .progress-bar {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .progress-count {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Categories grid */
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .category-card {
+    padding: 1rem;
+  }
+
+  .category-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Levels grid */
+  .levels-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .level-dot {
+    width: 18px;
+    height: 18px;
+  }
+
+  .level-dot.completed {
+    transform: scale(1.1);
+  }
+
+  /* Play button */
+  .play-button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  /* Floating button */
+  .floating-daily-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .floating-daily-btn svg {
+    font-size: 1.2rem;
+  }
+
+  /* Lock overlay */
+  .lock-overlay {
+    padding: 1rem;
+  }
+
+  .lock-overlay p {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
 }

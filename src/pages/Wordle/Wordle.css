@@ -485,3 +485,97 @@
     width: 100%;
   }
 }
+
+@media (max-width: 420px) {
+  /* Keyboard adjustments */
+  .wordle-keyboard {
+    gap: 0.4rem;
+    padding: 0.5rem;
+  }
+
+  .wordle-keyboard-row {
+    gap: 0.3rem;
+  }
+
+  .wordle-key {
+    width: 1.6rem;
+    height: 2.2rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+
+  .wordle-enter,
+  .wordle-backspace {
+    min-width: 2.5rem;
+    font-size: 0.7rem;
+    padding: 0 0.4rem;
+  }
+
+  /* Game board adjustments */
+  .wordle-tile {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+  }
+
+  /* Input area adjustments */
+  .wordle-input-area {
+    margin: 1rem 0;
+  }
+
+  .wordle-visible-input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .wordle-submit-btn {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  /* Header adjustments */
+  .wordle-header {
+    padding: 0.8rem;
+  }
+
+  .wordle-logo {
+    font-size: 1.5rem;
+  }
+
+  .wordle-nav {
+    gap: 0.8rem;
+  }
+
+  /* Container adjustments */
+  .wordle-container {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  /* Level card adjustments */
+  .wordle-level-card {
+    padding: 0.8rem;
+  }
+
+  .wordle-level-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .wordle-level-card p {
+    font-size: 0.9rem;
+  }
+
+  /* Control buttons */
+  .wordle-control-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Messages */
+  .wordle-status {
+    font-size: 0.9rem;
+  }
+}

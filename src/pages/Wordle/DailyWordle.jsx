@@ -188,10 +188,8 @@ export default function DailyWordle() {
         <div className="daily-wordle-logo">NEUROPLAY</div>
         <nav className="daily-wordle-nav">
           <a href="/" className="daily-wordle-nav-link">Home</a>
-          <a href="/wordle-levels" className="daily-wordle-nav-link">Games</a>
-          <a href="#benefits" className="daily-wordle-nav-link">Benefits</a>
-          <a href="#community" className="daily-wordle-nav-link">Community</a>
-          <a href="#contact" className="daily-wordle-nav-link">Contact</a>
+          <a href="/Games" className="daily-wordle-nav-link">Games</a>
+    
         </nav>
       </header>
 

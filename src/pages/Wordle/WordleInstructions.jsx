@@ -81,7 +81,7 @@ const navigate = useNavigate();
 
   <div style={{ display: 'flex', gap: '10px' }}>
     <button 
-      className="htpw-settings-btn"
+      className="htpw-back-btn"
       onClick={() => navigate('/Games')}
       aria-label="Back"
     >

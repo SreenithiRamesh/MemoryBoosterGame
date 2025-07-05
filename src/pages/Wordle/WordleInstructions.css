@@ -163,19 +163,24 @@
   background: rgba(0, 247, 255, 0.15);
   border: 2px solid var(--htpw-neon-blue);
   color: white;
-  padding: 8px;
+  width: 40px;              /* Explicit size */
+  height: 40px;
+  padding: 0;               /* Remove padding */
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  display: flex;            /* Center icon */
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;   /* Include border in total size */
 }
-
 .htpw-back-btn:hover {
   background: rgba(0, 247, 255, 0.3);
-  border-color: var(--htpw-neon-blue);
   transform: translateX(-2px);
   box-shadow: 0 0 20px var(--htpw-neon-blue);
 }
+
 
 .htpw-logo h1 {
   font-family: 'Orbitron', monospace;
@@ -188,17 +193,23 @@
   margin: 0;
   text-shadow: 0 0 90px var(--htpw-neon-blue);
 }
-
 .htpw-settings-btn {
   background: rgba(110, 0, 255, 0.2);
   border: 2px solid var(--htpw-primary-color);
   color: var(--htpw-text-light);
-  padding: 8px;
+  width: 40px;                 /* Equal width & height = circle */
+  height: 40px;
+  padding: 0;                  /* Remove default padding */
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  display: flex;               /* Center icon inside */
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;      /* Ensure border is inside dimensions */
 }
+
 
 .htpw-settings-btn:hover {
   background: rgba(110, 0, 255, 0.4);
