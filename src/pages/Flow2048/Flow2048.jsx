@@ -231,6 +231,12 @@ const Flow2048 = () => {
       />
       <div style={{ position: 'relative', zIndex: 1 }}>
         <div className="flow2048-settings-container">
+            <button 
+    className="flow2048-settings-button"
+    onClick={() => window.history.back()}
+    style={{ marginRight: '10px' }}
+  >⬅
+  </button>
           <button 
             className="flow2048-settings-button"
             onClick={() => setShowSettings(!showSettings)}

@@ -3,6 +3,7 @@ import './Home.css';
 import { FaBrain, FaGamepad, FaChartLine, FaUsers, FaMedal, FaLock } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import AIAssistant from '../../components/AIAssistant';
 
 
 
@@ -71,6 +72,7 @@ const Home = () => {
   }, []);
 
   return (
+    <div className="relative">
     <div className="home-page">
       {/* Video Background */}
       <div className="home-video-background">
@@ -268,28 +270,28 @@ const Home = () => {
         id: 1,
         title: "Wordle",
         genre: "Vocabulary Puzzle",
-        path: "/wordle",
+        path: "/wordle-instructions",
         imageClass: "home-game-wordle"
       },
       {
         id: 2,
         title: "Chess",
         genre: "Strategy Board Game",
-        path: "/chess-game",
+        path: "/chess-instructions",
         imageClass: "home-game-chess"
       },
       {
         id: 3,
         title: "Simon Game",
         genre: "Memory Challenge",
-        path: "/simon-game",
+        path: "/simon-instruction",
         imageClass: "home-game-simon"
       },
       {
         id: 4,
         title: "2048",
         genre: "Number Puzzle",
-        path: "/flow2048",
+        path: "/game2048-instructions",
         imageClass: "home-game-2048"
       }
     ].map((game) => (
@@ -317,6 +319,8 @@ const Home = () => {
       </section>
       
       <Footer />
+    </div>
+    <AIAssistant />
     </div>
   );
 };

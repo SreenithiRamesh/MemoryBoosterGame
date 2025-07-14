@@ -1,13 +1,17 @@
 
 import './2048Instructions.css'; // Adjust the path as necessary
-
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Play, Settings, Volume2, VolumeX, X } from 'lucide-react';
 
 const GameInstructions = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+const navigate = useNavigate();
 
+const handlePlayClick = () => {
+  navigate('/flow2048');
+};
   return (
     <div className="htpg-container">
       {/* Animated Background */}
@@ -63,7 +67,7 @@ const GameInstructions = () => {
             </div>
             
             {/* Start Button below demo board */}
-            <button className="htpg-btn htpg-btn-primary htpg-start-btn">
+            <button className="htpg-btn htpg-btn-primary htpg-start-btn"  onClick={handlePlayClick}>
               <Play className="htpg-icon" />
               Start Game
             </button>

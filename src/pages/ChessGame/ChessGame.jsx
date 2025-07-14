@@ -142,7 +142,6 @@ const ChessGame = () => {
   }, []);
 
   useEffect(() => {
-    // Update all sound volumes when mute state changes
     const volume = isMuted ? 0 : 1;
     if (soundMove.current) soundMove.current.volume(volume);
     if (soundCapture.current) soundCapture.current.volume(volume);
@@ -462,50 +461,41 @@ const ChessGame = () => {
       </Modal>
 
       <div className="chess-header">
-        <h1>Chess Master</h1>
-        <div className="chess-game-modes">
-          <button
-            onClick={() => { setGameMode('ai'); startNewGame(); }}
-            className={gameMode === 'ai' ? 'active' : ''}
-          >
-            vs AI
-          </button>
-          <button
-            onClick={() => { setGameMode('local'); startNewGame(); }}
-            className={gameMode === 'local' ? 'active' : ''}
-          >
-            Local Multiplayer
-          </button>
-          <div className="chess-header-buttons">
-            <button
-              onClick={() => {
-                window.location.href = '/';
-              }}
-              className="chess-back-button"
-            >
-              ← Back to Home
-            </button>
-            <div className="chess-settings-container">
-              <button 
-                className="chess-settings-button" 
-                onClick={() => setShowSettings(!showSettings)}
-              >
-                ⚙️
-              </button>
-              {showSettings && (
-                <div className="chess-settings-dropdown">
-                  <button 
-                    className={`chess-sound-button ${isMuted ? '' : 'active'}`}
-                    onClick={toggleMute}
-                  >
-                    {isMuted ? '🔇 Unmute' : '🔊 Mute'}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+  <h1>Chess Master</h1>
+  <div className="chess-header-controls">
+    <div className="chess-game-modes">
+      <button
+        onClick={() => { setGameMode('ai'); startNewGame(); }}
+        className={gameMode === 'ai' ? 'active' : ''}
+      >
+        vs AI
+      </button>
+      <button
+        onClick={() => { setGameMode('local'); startNewGame(); }}
+        className={gameMode === 'local' ? 'active' : ''}
+      >
+        Local
+      </button>
+    </div>
+    <div className="chess-header-buttons">
+      <button
+        onClick={() => { window.location.href = '/'; }}
+        className="chess-back-button"
+      >
+        ← Home
+      </button>
+      <div className="chess-sound-button-container">
+        <button 
+          className={`chess-sound-button ${isMuted ? 'muted' : ''}`}
+          onClick={toggleMute}
+          aria-label={isMuted ? 'Unmute sound' : 'Mute sound'}
+        >
+          {isMuted ? '🔇' : '🔊'}
+        </button>
       </div>
+    </div>
+  </div>
+</div>
 
       <div className="chess-game-area">
         <div className={`chess-player-info chess-white ${game.turn() === 'w' ? 'active' : ''} ${winner === 'white' ? 'winner' : ''}`}>
@@ -528,7 +518,7 @@ const ChessGame = () => {
             position={game.fen()}
             onPieceDrop={onDrop}
             onSquareClick={onSquareClick}
-            boardWidth={500}
+            boardWidth={Math.min(window.innerWidth - 40, 500)}
             customBoardStyle={{
               borderRadius: '4px',
               boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)',

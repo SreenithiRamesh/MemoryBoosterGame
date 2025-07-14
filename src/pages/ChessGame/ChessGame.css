@@ -550,3 +550,203 @@
     max-width: 100%;
   }
 }
+
+/* Remove the existing settings button styles and replace with: */
+
+.chess-sound-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.chess-sound-button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.chess-sound-button:hover {
+  background: rgba(0, 247, 255, 0.3);
+}
+
+.chess-sound-button.muted {
+  opacity: 0.7;
+}
+
+/* Remove these if they exist */
+.chess-settings-container,
+.chess-settings-button,
+.chess-settings-dropdown {
+  display: none;
+}/* Add these to your ChessGame.css file */
+
+/* Updated Header Styles */
+.chess-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chess-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  background: linear-gradient(to right, var(--chess-primary-color), var(--chess-secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.chess-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.chess-game-modes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chess-game-modes button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.chess-game-modes button.active {
+  background: var(--chess-accent-color);
+  color: var(--chess-dark-bg);
+  font-weight: bold;
+}
+
+.chess-header-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chess-back-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.chess-back-button:hover {
+  background: rgba(0, 247, 255, 0.3);
+}
+
+.chess-settings-button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.chess-settings-button.active {
+  background: var(--chess-accent-color);
+  color: var(--chess-dark-bg);
+}
+
+.chess-settings-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: rgba(15, 15, 26, 0.9);
+  border-radius: 5px;
+  padding: 0.5rem;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.chess-sound-button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.chess-sound-button.active {
+  background: var(--chess-accent-color);
+  color: var(--chess-dark-bg);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .chess-header {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .chess-header h1 {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+  
+  .chess-game-modes button {
+    font-size: 1rem;
+  }
+  
+  .chess-back-button {
+    font-size: 1rem;
+  }
+}
+
+/* Board responsive sizing */
+@media (max-width: 500px) {
+  .chess-player-info {
+    padding: 0.5rem;
+  }
+  
+  .chess-player-avatar {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .chess-timer {
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .chess-player-meta h3 {
+    font-size: 0.9rem;
+  }
+}
