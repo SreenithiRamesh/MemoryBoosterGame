@@ -1,0 +1,683 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Base styles */
+.simon-game {
+  min-height: 100vh;
+  background: linear-gradient(to right top, #0f0c29, #302b63, #24243e);
+  background-attachment: fixed;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.simon-pulse-circle-1,
+.simon-pulse-circle-2,
+.simon-pulse-circle-3 {
+  filter: blur(3rem);
+  opacity: 0.6;
+}
+
+
+/* Background elements */
+.simon-animated-background {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+}
+
+.simon-pulse-circle-1 {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  width: 18rem;
+  height: 18rem;
+  background-color: #a855f7;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(1.5rem);
+  opacity: 0.7;
+  animation: simon-pulse 4s infinite;
+}
+
+.simon-pulse-circle-2 {
+  position: absolute;
+  top: 10rem;
+  right: 2.5rem;
+  width: 24rem;
+  height: 24rem;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(1.5rem);
+  opacity: 0.7;
+  animation: simon-pulse 4s infinite 2s;
+}
+
+.simon-pulse-circle-3 {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20rem;
+  height: 20rem;
+  background-color: #ec4899;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(1.5rem);
+  opacity: 0.7;
+  animation: simon-pulse 4s infinite 4s;
+}
+
+@keyframes simon-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Particles */
+.simon-particles-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.simon-particle {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: simon-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes simon-ping {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Header */
+
+.simon-header-icons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+
+.simon-game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  border-radius: 1rem;
+}
+.simon-mode-toggle-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background-color: #1e293b;
+  border: 1px solid #4b5563;
+  border-radius: 9999px;
+  color: #38bdf8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.simon-mode-toggle-header:hover {
+  background-color: #334155;
+}
+
+
+
+.simon-score-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.simon-score-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.simon-score-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #22d3ee;
+}
+
+.simon-score-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22d3ee;
+}
+
+.simon-level-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #f472b6;
+}
+
+.simon-level-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f472b6;
+}
+
+.simon-high-score-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4ade80;
+}
+
+.simon-high-score-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.simon-sound-toggle,
+.simon-back-button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(31, 41, 55, 0.8);
+  border: 2px solid #38bdf8;
+  border-radius: 50%;
+  color: #38bdf8;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.simon-sound-toggle:hover,
+.simon-back-button:hover {
+  background-color: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 12px #38bff860;
+  transform: scale(1.05);
+}
+
+
+
+.simon-back-button:hover {
+  background-color: #374151;
+}
+
+
+/* Main content */
+.simon-game-container {
+  position: relative;
+  z-index: 10;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.simon-game-title {
+  text-align: center;
+  margin: 2rem;
+
+}
+
+.simon-game-title h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00e0ff;
+}
+
+.simon-simon-text {
+  background: linear-gradient(to right, #22d3ee, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.simon-says-text {
+background: linear-gradient(to right, #22d3ee, #3b82f6);
+  margin-left: 1rem;
+ -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.simon-game-subtitle {
+  font-size: 1.25rem;
+  color: #d1d5db;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+/* Game status */
+.simon-game-status {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.simon-game-status-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.simon-watching {
+  color: #facc15;
+  animation: simon-pulse 2s infinite;
+}
+
+.simon-your-turn {
+  color: #4ade80;
+}
+
+.simon-game-over {
+  color: #f87171;
+}
+
+/* Game board */
+.simon-game-board {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.simon-simon-circle {
+  position: relative;
+  width: 24rem;
+  height: 24rem;
+  background-color: #1f2937;
+  border-radius: 50%;
+  border: 8px solid #4b5563;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+}
+
+.simon-center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8rem;
+  height: 8rem;
+  background-color: #111827;
+  border-radius: 50%;
+  border: 4px solid #6b7280;
+}
+
+.simon-center-dot {
+  width: 4rem;
+  height: 4rem;
+  background-color: #374151;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Game buttons */
+.simon-game-button {
+  position: absolute;
+  width: 11rem;
+  height: 11rem;
+  border: 4px solid #4b5563;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.simon-game-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.simon-game-button-top-right {
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: 0 100% 0 0;
+}
+
+.simon-game-button-top-left {
+  top: 0.5rem;
+  left: 0.5rem;
+  border-radius: 100% 0 0 0;
+}
+
+.simon-game-button-bottom-left {
+  bottom: 0.5rem;
+  left: 0.5rem;
+  border-radius: 0 0 0 100%;
+}
+
+.simon-game-button-bottom-right {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  border-radius: 0 0 100% 0;
+}
+
+.simon-button-red {
+  background-color: #dc2626;
+}
+
+.simon-button-red:hover:not(:disabled) {
+  background-color: #ef4444;
+  transform: scale(1.05);
+}
+
+.simon-button-red-active {
+  background-color: #f87171;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #dc2626;
+}
+
+.simon-button-blue {
+  background-color: #2563eb;
+}
+
+.simon-button-blue:hover:not(:disabled) {
+  background-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.simon-button-blue-active {
+  background-color: #60a5fa;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #2563eb;
+}
+
+.simon-button-yellow {
+  background-color: #ca8a04;
+}
+
+.simon-button-yellow:hover:not(:disabled) {
+  background-color: #eab308;
+  transform: scale(1.05);
+}
+
+.simon-button-yellow-active {
+  background-color: #facc15;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #ca8a04;
+}
+
+.simon-button-green {
+  background-color: #16a34a;
+}
+
+.simon-button-green:hover:not(:disabled) {
+  background-color: #22c55e;
+  transform: scale(1.05);
+}
+
+.simon-button-green-active {
+  background-color: #4ade80;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #16a34a;
+}
+
+.simon-button-active-indicator {
+  width: 2rem;
+  height: 2rem;
+  background-color: white;
+  border-radius: 50%;
+  animation: simon-ping 1s ease-out;
+}
+
+/* Controls */
+.simon-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.simon-control-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.simon-control-button:hover {
+  transform: scale(1.05);
+}
+
+.simon-start-button {
+  background: linear-gradient(to right, #22c55e, #3b82f6);
+}
+
+.simon-start-button:hover {
+  background: linear-gradient(to right, #16a34a, #2563eb);
+}
+
+.simon-reset-button {
+  background: linear-gradient(to right, #ef4444, #ec4899);
+}
+
+.simon-reset-button:hover {
+  background: linear-gradient(to right, #dc2626, #db2777);
+}
+
+.simon-icon-circle {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 2px solid #38bdf8;
+  border-radius: 50%;
+  color: #38bdf8;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.simon-icon-circle:hover {
+  background-color: rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 10px #38bdf8;
+  transform: scale(1.1);
+}
+
+
+/* Responsive styles */
+@media (max-width: 720px) {
+  .simon-game-header {
+    padding: 0.75rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .simon-score-container {
+    gap: 1rem;
+    order: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .simon-mode-toggle-wrapper {
+    order: 2;
+    margin: 0 auto;
+  }
+
+  .simon-header-controls {
+    order: 3;
+    margin-left: auto;
+  }
+
+  .simon-simon-circle {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .simon-game-button {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .simon-center-circle {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .simon-center-dot {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .simon-game-title h1 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+  }
+
+  .simon-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .simon-control-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .simon-game-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .simon-score-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+  }
+.simon-mode-toggle-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.simon-mode-toggle-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background-color: #1e293b;
+  border: 1px solid #4b5563;
+  border-radius: 9999px;
+  color: #38bdf8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.simon-mode-toggle-header:hover {
+  background-color: #334155;
+}
+
+  .simon-back-button,
+  .simon-sound-toggle,
+  .simon-icon-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .simon-back-button svg,
+  .simon-sound-toggle svg,
+  .simon-icon-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .simon-simon-circle {
+    width: 16rem;
+    height: 16rem;
+  }
+  
+  .simon-game-button {
+    width: 7rem;
+    height: 7rem;
+  }
+  
+  .simon-center-circle {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .simon-center-dot {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .simon-game-title h1 {
+    font-size: 2rem;
+  }
+
+  .simon-score-container {
+    gap: 1rem;
+  }
+
+  .simon-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Show/hide based on screen size */
+.desktop-only {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: flex;
+    justify-content: center;
+  }
+}
