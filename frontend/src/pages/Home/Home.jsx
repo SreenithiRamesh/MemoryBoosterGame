@@ -4,8 +4,7 @@ import { FaBrain, FaGamepad, FaChartLine, FaUsers, FaMedal, FaLock } from 'react
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import AIAssistant from '../../components/AIAssistant';
-
-
+import Navigation from '../../components/Navigation/Navigation'; // Import the new Navigation component
 
 const Home = () => {
   useEffect(() => {
@@ -21,7 +20,6 @@ const Home = () => {
     document.querySelectorAll('.home-animate-on-scroll').forEach((el) => {
       observer.observe(el);
     });
-// const navigate = useNavigate();
 
     // Number counter animation
     const animateNumbers = () => {
@@ -91,16 +89,8 @@ const Home = () => {
         <div className="home-overlay"></div>
       </div>
 
-      {/* Header */}
-      <header className="home-header">
-        <div className="home-logo">NEUROPLAY</div>
-        <nav className="home-nav">
-          <a href="#home" className="home-nav-link">Home</a>
-          <a href="/Games" className="home-nav-link">Games</a>
-         
-          <a href="/login" className="home-nav-link">Login / Register</a>
-        </nav>
-      </header>
+      {/* Replace the hardcoded header with the Navigation component */}
+      <Navigation />
 
       
 <section className="home-hero-section">

@@ -1,0 +1,389 @@
+/* Navigation.css */
+
+/* Keep original header and logo styles - no changes to NEUROPLAY or nav background */
+
+/* Navigation Container - keep original alignment */
+.home-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Navigation Links - only button styling changes */
+.home-nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--text-light, #ffffff);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  height: 40px; /* Same height as profile button */
+  box-sizing: border-box;
+}
+
+.home-nav-link:hover {
+  background: rgba(0, 247, 255, 0.1);
+  border-color: rgba(0, 247, 255, 0.3);
+  color: var(--accent-color, #00f7ff);
+  transform: translateY(-1px);
+}
+
+/* Login/Register Button */
+.nav-login-register {
+  background: linear-gradient(45deg, var(--primary-color, #6e00ff), var(--secondary-color, #00f7ff));
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(110, 0, 255, 0.3);
+  color: white !important;
+  height: 40px; /* Same height as other nav elements */
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.nav-login-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(110, 0, 255, 0.5);
+  background: linear-gradient(45deg, var(--secondary-color, #00f7ff), var(--primary-color, #6e00ff));
+  color: white !important;
+}
+
+/* Profile Dropdown Styles */
+.nav-profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-profile-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 0.4rem 1rem;
+  color: var(--text-light, #ffffff);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  height: 40px; /* Consistent height */
+  box-sizing: border-box;
+}
+
+.nav-profile-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 247, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 247, 255, 0.2);
+}
+
+.nav-profile-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 247, 255, 0.3);
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+/* Avatar Icon Styles */
+.nav-avatar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.2), rgba(110, 0, 255, 0.2));
+  border: 2px solid rgba(0, 247, 255, 0.3);
+  color: var(--accent-color, #00f7ff);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.nav-avatar-icon svg {
+  filter: drop-shadow(0 0 2px rgba(0, 247, 255, 0.3));
+}
+
+/* Profile Image Loading State */
+.nav-image-loading {
+  display: none !important;
+}
+
+.nav-profile-button:hover .nav-profile-image,
+.nav-profile-button:hover .nav-avatar-icon {
+  border-color: rgba(0, 247, 255, 0.6);
+  box-shadow: 0 0 10px rgba(0, 247, 255, 0.4);
+}
+
+.nav-profile-button:hover .nav-avatar-icon {
+  border-color: rgba(0, 247, 255, 0.8);
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.3), rgba(110, 0, 255, 0.3));
+  box-shadow: 0 0 15px rgba(0, 247, 255, 0.4);
+}
+
+/* Dropdown Avatar Styles */
+.nav-dropdown-avatar.nav-avatar-icon {
+  background: linear-gradient(135deg, rgba(0, 247, 255, 0.15), rgba(110, 0, 255, 0.15));
+  border: 2px solid rgba(0, 247, 255, 0.3);
+}
+
+.nav-username {
+  font-size: 0.9rem;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-dropdown-arrow {
+  color: var(--text-muted, #888);
+  transition: transform 0.3s ease;
+}
+
+.nav-dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 280px;
+  background: rgba(15, 15, 26, 0.95);
+  border: 1px solid rgba(0, 247, 255, 0.2);
+  border-radius: 15px;
+  padding: 1rem 0;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 247, 255, 0.1);
+  animation: dropdownFadeIn 0.3s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* User Info Section */
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.nav-dropdown-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 247, 255, 0.3);
+  object-fit: cover;
+}
+
+.nav-user-details {
+  flex: 1;
+}
+
+.nav-user-name {
+  font-weight: 600;
+  color: var(--text-light, #ffffff);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.nav-user-email {
+  font-size: 0.85rem;
+  color: var(--text-muted, #888);
+  margin-bottom: 0.25rem;
+}
+
+.nav-user-level {
+  font-size: 0.8rem;
+  color: var(--accent-color, #00f7ff);
+  background: rgba(0, 247, 255, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/* Divider */
+.nav-dropdown-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 247, 255, 0.3),
+    transparent
+  );
+  margin: 0.75rem 1rem;
+}
+
+/* Dropdown Items */
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-light, #ffffff);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nav-dropdown-item:hover {
+  background: rgba(0, 247, 255, 0.1);
+  color: var(--accent-color, #00f7ff);
+  padding-left: 1.25rem;
+}
+
+.nav-dropdown-item svg {
+  color: var(--text-muted, #888);
+  transition: color 0.2s ease;
+}
+
+.nav-dropdown-item:hover svg {
+  color: var(--accent-color, #00f7ff);
+}
+
+/* Logout Button Specific */
+.nav-logout-btn {
+  color: #ff4757;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+}
+
+.nav-logout-btn:hover {
+  background: rgba(255, 71, 87, 0.1);
+  color: #ff4757;
+}
+
+.nav-logout-btn svg {
+  color: #ff4757;
+}
+
+.nav-logout-btn:hover svg {
+  color: #ff4757;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .nav-dropdown-menu {
+    min-width: 260px;
+  }
+  
+  .nav-username {
+    display: none;
+  }
+  
+  .nav-profile-button {
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .home-nav {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-nav {
+    gap: 0.5rem;
+  }
+  
+  .home-nav-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .nav-login-register {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .nav-dropdown-menu {
+    position: fixed;
+    top: 80px;
+    right: 1rem;
+    left: 1rem;
+    min-width: auto;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .nav-profile-button {
+    padding: 0.4rem;
+  }
+  
+  .nav-dropdown-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-nav {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .home-nav-link {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    min-height: 32px;
+    height: auto;
+  }
+  
+  .nav-login-register {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    min-height: 32px;
+    height: auto;
+  }
+  
+  .nav-profile-button {
+    min-height: 32px;
+    height: auto;
+  }
+  
+  .nav-user-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .nav-dropdown-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .nav-dropdown-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+}

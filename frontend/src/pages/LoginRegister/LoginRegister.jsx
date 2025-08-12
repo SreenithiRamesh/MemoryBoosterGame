@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginRegister = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,6 +13,10 @@ const LoginRegister = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [activeProgress, setActiveProgress] = useState(0);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -19,41 +24,90 @@ const LoginRegister = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+    setError('');
+    setSuccess('');
+
+    // Frontend validation
     if (!isLogin) {
       if (formData.password !== formData.confirmPassword) {
-        alert('Passwords do not match!');
+        setError('Passwords do not match!');
         setIsLoading(false);
         return;
       }
       if (!formData.agreeTerms) {
-        alert('Please agree to the Terms of Service');
+        setError('Please agree to the Terms of Service');
+        setIsLoading(false);
+        return;
+      }
+      if (formData.password.length < 6) {
+        setError('Password must be at least 6 characters long');
         setIsLoading(false);
         return;
       }
     }
 
-    setTimeout(() => {
-      setIsLoading(false);
-      if (isLogin) {
-        alert(`Login successful for: ${formData.email}`);
-      } else {
-        alert(`Account created successfully for: ${formData.username}`);
+    try {
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+      const body = isLogin 
+        ? { email: formData.email, password: formData.password }
+        : {
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            newsletter: formData.newsletter
+          };
+
+      const response = await fetch(`http://localhost:5000${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
       }
-    }, 2000);
+
+      // Success - store token and user data
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      setSuccess(data.message);
+
+      // Redirect after success
+      setTimeout(() => {
+        navigate('/'); // Redirect to home page
+      }, 1500);
+
+    } catch (error) {
+      console.error('Auth error:', error);
+      setError(error.message || 'Network error occurred');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const socialLogin = (provider) => {
-    alert(`Connecting with ${provider.charAt(0).toUpperCase() + provider.slice(1)}...`);
+    setError('');
+    // Placeholder for social login implementation
+    setError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login not implemented yet`);
   };
 
   const showForgotPassword = () => {
     const email = prompt('Enter your email address to reset password:');
     if (email) {
-      alert(`Password reset link sent to: ${email}`);
+      // TODO: Implement password reset
+      setSuccess(`Password reset functionality will be implemented soon. Email: ${email}`);
     }
   };
 
@@ -67,8 +121,11 @@ const LoginRegister = () => {
       agreeTerms: false,
       newsletter: false
     });
+    setError('');
+    setSuccess('');
   };
 
+  // Particle animation (unchanged)
   const createFloatingParticle = () => {
     const particle = document.createElement('div');
     particle.style.position = 'fixed';
@@ -122,6 +179,8 @@ const LoginRegister = () => {
           --neon-blue: #00f7ff;
           --neon-purple: #9d00ff;
           --neon-pink: #ff00e4;
+          --error-color: #ff4757;
+          --success-color: #2ed573;
         }
 
         * {
@@ -285,6 +344,7 @@ const LoginRegister = () => {
           transform: translateY(-10px);
           box-shadow: 0 20px 60px rgba(110, 0, 255, 0.3);
         }
+
         .auth-card-header {
           text-align: center;
           margin-bottom: 30px;
@@ -351,25 +411,22 @@ const LoginRegister = () => {
         }
 
         .auth-action-btn {
- 
-  padding: 10px 10px;
-  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
-  border: none;
-
-  border-radius: 10px;
-  color: var(--text-light);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
+          padding: 12px 24px;
+          background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+          border: none;
+          border-radius: 10px;
+          color: var(--text-light);
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 600;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-align: center;
+        }
 
         .auth-action-btn::before {
           content: '';
@@ -478,7 +535,7 @@ const LoginRegister = () => {
           margin-bottom: 15px;
         }
 
-        .auth-checkbox-group input[type=\"checkbox\"] {
+        .auth-checkbox-group input[type="checkbox"] {
           margin-right: 10px;
           width: 18px;
           height: 18px;
@@ -548,6 +605,27 @@ const LoginRegister = () => {
           color: var(--neon-pink);
         }
 
+        .auth-message {
+          padding: 12px 16px;
+          border-radius: 8px;
+          margin-bottom: 20px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          text-align: center;
+        }
+
+        .auth-error {
+          background: rgba(255, 71, 87, 0.1);
+          border: 1px solid rgba(255, 71, 87, 0.3);
+          color: var(--error-color);
+        }
+
+        .auth-success {
+          background: rgba(46, 213, 115, 0.1);
+          border: 1px solid rgba(46, 213, 115, 0.3);
+          color: var(--success-color);
+        }
+
         @keyframes slideInUp {
           from {
             opacity: 0;
@@ -573,15 +651,6 @@ const LoginRegister = () => {
           .auth-main-title {
             font-size: 2.5rem;
           }
-
-          .auth-stats-bar {
-            flex-wrap: wrap;
-            gap: 20px;
-          }
-
-          .auth-stat-item {
-            padding: 8px 15px;
-          }
         }
 
         @media (max-width: 480px) {
@@ -596,15 +665,11 @@ const LoginRegister = () => {
           .auth-social-buttons {
             flex-direction: column;
           }
-
-          .auth-stats-bar {
-            display: none;
-          }
         }
       `}
       </style>
-            <div className="auth-cosmic-bg"></div>
-
+      
+      <div className="auth-cosmic-bg"></div>
       <div className="auth-orb"></div>
       <div className="auth-orb"></div>
       <div className="auth-orb"></div>
@@ -623,7 +688,10 @@ const LoginRegister = () => {
             </p>
           </div>
 
-          <div>
+          {error && <div className="auth-message auth-error">{error}</div>}
+          {success && <div className="auth-message auth-success">{success}</div>}
+
+          <form onSubmit={handleSubmit}>
             {!isLogin && (
               <div className="auth-form-field">
                 <label htmlFor="username">Username</label>
@@ -660,7 +728,7 @@ const LoginRegister = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                placeholder={isLogin ? "Enter your password" : "Create a password"}
+                placeholder={isLogin ? "Enter your password" : "Create a password (min 6 chars)"}
                 required
               />
             </div>
@@ -712,7 +780,7 @@ const LoginRegister = () => {
 
             <div className="auth-action-section">
               <button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={isLoading}
                 className="auth-action-btn"
               >
@@ -730,7 +798,7 @@ const LoginRegister = () => {
                 </div>
               )}
             </div>
-          </div>
+          </form>
 
           <div className="auth-social-section">
             <div className="auth-social-divider">
@@ -747,7 +815,7 @@ const LoginRegister = () => {
             <p className="auth-toggle-text">
               {isLogin ? "Don't have an account?" : "Already have an account?"}
             </p>
-            <button className="auth-toggle-btn" onClick={toggleAuthMode}>
+            <button className="auth-toggle-btn" onClick={toggleAuthMode} type="button">
               {isLogin ? 'Create Account' : 'Sign In'}
             </button>
           </div>
@@ -767,4 +835,3 @@ const LoginRegister = () => {
 };
 
 export default LoginRegister;
-
