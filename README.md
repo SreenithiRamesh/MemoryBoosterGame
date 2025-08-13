@@ -73,6 +73,7 @@
 ### 🔥 **Daily Challenges**
 - Firebase-powered daily Wordle challenges
 ---
+<img width="947" height="364" alt="image" src="https://github.com/user-attachments/assets/5ec3a93f-ec7c-4f6f-a064-20a6c789c078" />
 
 ## 🛠️ Technology Stack
 
