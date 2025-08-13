@@ -6,17 +6,33 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "gaming",
+    "memorybooster",
+    "brain-training",
+    "api"
+  ],
+  "author": "SreenithiRamesh",
   "license": "ISC",
-  "description": "",
+  "description": "Backend API for NeuroPlay gaming platform",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "express-rate-limit": "^6.11.2",
+    "express-validator": "^7.2.1",
+    "helmet": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.17.1"
+    "moment": "^2.30.1",
+    "mongoose": "^8.17.1",
+    "morgan": "^1.10.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.1",
+    "redis": "^4.7.1",
+    "sharp": "^0.32.6",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

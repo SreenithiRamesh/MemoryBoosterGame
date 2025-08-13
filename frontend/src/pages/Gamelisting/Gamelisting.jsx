@@ -1,55 +1,58 @@
 import React, { useState } from 'react';
-
+import Navigation from '../../components/Navigation/Navigation';
+import { Link } from 'react-router-dom';
 export default function GamesListing() {
   const [hoveredGame, setHoveredGame] = useState(null);
-
-  const games = [
-    {
-      id: 'wordle',
-      title: 'Wordle',
-      description: 'Guess the 5-letter word in 6 tries. Test your vocabulary! Green means go, yellow means slow, gray means... oh no',
-      color: 'linear-gradient(135deg, #6e00ff, #9d00ff, #ff00e4)',
-      bgColor: 'linear-gradient(135deg, rgba(110, 0, 255, 0.2), rgba(157, 0, 255, 0.2))',
-      glowColor: 'rgba(110, 0, 255, 0.3)',
-      icon: 'W',
-      difficulty: 'Medium',
-      players: '1 Player'
-    },
-      {
-      id: 'chess',
-      title: 'Chess',
-      description: 'Classic strategy game. Plan your moves and outsmart your opponent in this timeless battle.',
-      color: 'linear-gradient(135deg, #a78bfa, #6366f1, #2563eb)',
-      bgColor: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(37, 99, 235, 0.2))',
-      glowColor: 'rgba(139, 92, 246, 0.3)',
-      icon: '♛',
-      difficulty: 'Expert',
-      players: '2 Players'
-    },
-    {
-      id: '2048',
-      title: '2048',
-      description: 'Combine tiles to reach 2048! Strategic sliding puzzle that challenges your planning.',
-      color: 'linear-gradient(135deg, #ff00e4, #9d00ff, #00f7ff)',
-      bgColor: 'linear-gradient(135deg, rgba(255, 0, 228, 0.2), rgba(157, 0, 255, 0.2))',
-      glowColor: 'rgba(255, 0, 228, 0.3)',
-      icon: '2048',
-      difficulty: 'Hard',
-      players: '1 Player'
-    },
-  
-    {
-      id: 'simon',
-      title: 'Simon Says',
-      description: 'Remember and repeat the sequence! Train your memory with this colorful challenge.',
-      color: 'linear-gradient(135deg, #22d3ee, #3b82f6, #6366f1)',
-      bgColor: 'linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(37, 99, 235, 0.2))',
-      glowColor: 'rgba(34, 211, 238, 0.3)',
-      icon: '●',
-      difficulty: 'Easy',
-      players: '1 Player'
-    }
-  ];
+const games = [
+  {
+    id: 'wordle',
+    title: 'Wordle',
+    description: 'Guess the 5-letter word in 6 tries. Test your vocabulary! Green means go, yellow means slow, gray means... oh no',
+    color: 'linear-gradient(135deg, #6e00ff, #9d00ff, #ff00e4)',
+    bgColor: 'linear-gradient(135deg, rgba(110, 0, 255, 0.2), rgba(157, 0, 255, 0.2))',
+    glowColor: 'rgba(110, 0, 255, 0.3)',
+    icon: 'W',
+    difficulty: 'Medium',
+    players: '1 Player',
+    link: '/wordle-instructions'  // Add this
+  },
+  {
+    id: 'chess',
+    title: 'Chess',
+    description: 'Classic strategy game. Plan your moves and outsmart your opponent in this timeless battle.',
+    color: 'linear-gradient(135deg, #a78bfa, #6366f1, #2563eb)',
+    bgColor: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(37, 99, 235, 0.2))',
+    glowColor: 'rgba(139, 92, 246, 0.3)',
+    icon: '♛',
+    difficulty: 'Expert',
+    players: '2 Players',
+    link: '/chess-instructions'  // Add this
+  },
+  {
+    id: '2048',
+    title: '2048',
+    description: 'Combine tiles to reach 2048! Strategic sliding puzzle that challenges your planning.',
+    color: 'linear-gradient(135deg, #ff00e4, #9d00ff, #00f7ff)',
+    bgColor: 'linear-gradient(135deg, rgba(255, 0, 228, 0.2), rgba(157, 0, 255, 0.2))',
+    glowColor: 'rgba(255, 0, 228, 0.3)',
+    icon: '2048',
+    difficulty: 'Hard',
+    players: '1 Player',
+    link: '/game2048-instructions'  // Add this
+  },
+  {
+    id: 'simon',
+    title: 'Simon Says',
+    description: 'Remember and repeat the sequence! Train your memory with this colorful challenge.',
+    color: 'linear-gradient(135deg, #22d3ee, #3b82f6, #6366f1)',
+    bgColor: 'linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(37, 99, 235, 0.2))',
+    glowColor: 'rgba(34, 211, 238, 0.3)',
+    icon: '●',
+    difficulty: 'Easy',
+    players: '1 Player',
+    link: '/simon-instruction'  // Add this
+  }
+];
 
   const styles = {
     container: {
@@ -64,6 +67,7 @@ export default function GamesListing() {
       inset: 0,
       pointerEvents: 'none'
     },
+    
     bgEffect1: {
       position: 'absolute',
       top: '25%',
@@ -440,12 +444,13 @@ export default function GamesListing() {
                     <span style={styles.infoText}>{game.players}</span>
                   </div>
                 </div>
-                <button 
-                  className="play-button"
-                  style={styles.playButton(game)}
-                >
-                  Play Now
-                </button>
+                <Link 
+  to={game.link}  // Use the link from the game object
+  className="play-button"
+  style={styles.playButton(game)}
+>
+  Play Now
+</Link>
               </div>
             </div>
             {isHovered && (
@@ -465,6 +470,7 @@ export default function GamesListing() {
     <>
       <style>{cssAnimations}</style>
       <div style={styles.container}>
+          <Navigation />
         <div style={styles.backgroundEffects}>
           <div style={styles.bgEffect1}></div>
           <div style={styles.bgEffect2}></div>

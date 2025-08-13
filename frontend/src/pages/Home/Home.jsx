@@ -198,59 +198,58 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section className="home-features-section">
-          <h2 className="home-section-title home-animate-on-scroll">WHY CHOOSE NEUROPLAY?</h2>
-          <div className="home-features-grid">
-            <div className="home-feature-card home-animate-on-scroll">
-              <div className="home-feature-icon">
-                <FaBrain />
-              </div>
-              <h3>Science-Based Design</h3>
-              <p>Every game is crafted by neuroscientists using proven cognitive training methodologies to maximize brain improvement</p>
-            </div>
-            
-            <div className="home-feature-card home-animate-on-scroll">
-              <div className="home-feature-icon">
-                <FaGamepad />
-              </div>
-              <h3>Engaging Gameplay</h3>
-              <p>Experience addictive, fun games that make brain training feel like entertainment rather than work</p>
-            </div>
-            
-            <div className="home-feature-card home-animate-on-scroll">
-              <div className="home-feature-icon">
-                <FaChartLine />
-              </div>
-              <h3>Progress Tracking</h3>
-              <p>Monitor your cognitive improvement with detailed analytics and personalized insights into your brain training journey</p>
-            </div>
-            
-            <div className="home-feature-card home-animate-on-scroll">
-              <div className="home-feature-icon">
-                <FaUsers />
-              </div>
-              <h3>Community Challenges</h3>
-              <p>Compete with friends and join global leaderboards to stay motivated and challenge yourself against others</p>
-            </div>
-            
-            <div className="home-feature-card home-animate-on-scroll">
-              <div className="home-feature-icon">
-                <FaMedal />
-              </div>
-              <h3>Achievement System</h3>
-              <p>Unlock rewards, badges, and achievements as you progress through levels and reach new cognitive milestones</p>
-            </div>
-            
-            <div className="home-feature-card home-animate-on-scroll">
-              <div className="home-feature-icon">
-                <FaLock />
-              </div>
-              <h3>Secure & Private</h3>
-              <p>Your personal data and progress are protected with enterprise-grade security and privacy measures</p>
-            </div>
-          </div>
-        </section>
-
+   <section className="home-features-section">
+  <h2 className="home-section-title home-animate-on-scroll">WHY CHOOSE NEUROPLAY?</h2>
+  <div className="home-features-grid">
+    <div className="home-feature-card home-animate-on-scroll">
+      <div className="home-feature-icon">
+        <FaBrain />
+      </div>
+      <h3>Neuroscience-Backed</h3>
+      <p>Our games are designed by cognitive experts using proven neuroscience principles to enhance memory, focus, and problem-solving skills</p>
+    </div>
+    
+    <div className="home-feature-card home-animate-on-scroll">
+      <div className="home-feature-icon">
+        <FaGamepad />
+      </div>
+      <h3>Immersive Experience</h3>
+      <p>Enjoy beautifully designed games that captivate your attention while subtly training your cognitive abilities</p>
+    </div>
+    
+    <div className="home-feature-card home-animate-on-scroll">
+      <div className="home-feature-icon">
+      <FaUsers/>
+      </div>
+      <h3>Flexible Training</h3>
+      <p>Short, effective sessions that fit into any schedule - train your brain whenever you have a few spare minutes</p>
+    </div>
+    
+    <div className="home-feature-card home-animate-on-scroll">
+      <div className="home-feature-icon">
+      <FaChartLine/>
+      </div>
+      <h3>Skill Variety</h3>
+      <p>Target different cognitive domains with specialized games for memory, attention, logic, and mental agility</p>
+    </div>
+    
+    <div className="home-feature-card home-animate-on-scroll">
+      <div className="home-feature-icon">
+        <FaMedal />
+      </div>
+      <h3>Personal Milestones</h3>
+      <p>Celebrate your personal growth and cognitive achievements as you master increasingly challenging levels</p>
+    </div>
+    
+    <div className="home-feature-card home-animate-on-scroll">
+      <div className="home-feature-icon">
+        <FaLock />
+      </div>
+      <h3>Data Privacy</h3>
+      <p>We prioritize your privacy with strict data protection measures - your cognitive training remains confidential</p>
+    </div>
+  </div>
+</section>
       {/* Featured Games Section */}
      <section className="home-featured-games">
   <h2 className="home-section-title home-animate-on-scroll">FEATURED GAMES</h2>

@@ -1,4 +1,4 @@
-/* Navigation.css */
+/* Navigation.css - Enhanced with better avatar and image handling */
 
 /* Keep original header and logo styles - no changes to NEUROPLAY or nav background */
 
@@ -15,7 +15,7 @@
   align-items: center;
   padding: 0.5rem 1rem;
   color: var(--text-light, #ffffff);
-  text-decoration: none;
+
   font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   border-radius: 25px;
@@ -72,7 +72,7 @@
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
+  border-radius: 100px;
   padding: 0.4rem 1rem;
   color: var(--text-light, #ffffff);
   cursor: pointer;
@@ -82,6 +82,7 @@
   backdrop-filter: blur(10px);
   height: 40px; /* Consistent height */
   box-sizing: border-box;
+  
 }
 
 .nav-profile-button:hover {
@@ -90,26 +91,41 @@
   box-shadow: 0 4px 20px rgba(0, 247, 255, 0.2);
 }
 
+/* Profile Image Styles - Enhanced for both img and div avatars */
 .nav-profile-image {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   border: 2px solid rgba(0, 247, 255, 0.3);
-  object-fit: cover;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-/* Avatar Icon Styles */
+/* For actual images */
+.nav-profile-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: none; /* Border is on parent */
+}
+
+/* Avatar Icon Styles - Enhanced for text-based avatars */
 .nav-avatar-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(0, 247, 255, 0.2), rgba(110, 0, 255, 0.2));
+  background: linear-gradient(135deg, #6e00ff, #00f7ff);
   border: 2px solid rgba(0, 247, 255, 0.3);
-  color: var(--accent-color, #00f7ff);
+  color: white;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
   transition: all 0.3s ease;
   backdrop-filter: blur(5px);
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .nav-avatar-icon svg {
@@ -118,25 +134,50 @@
 
 /* Profile Image Loading State */
 .nav-image-loading {
-  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute !important;
 }
 
+/* Hover effects for both image types */
 .nav-profile-button:hover .nav-profile-image,
 .nav-profile-button:hover .nav-avatar-icon {
   border-color: rgba(0, 247, 255, 0.6);
   box-shadow: 0 0 10px rgba(0, 247, 255, 0.4);
+  transform: scale(1.05);
 }
 
 .nav-profile-button:hover .nav-avatar-icon {
   border-color: rgba(0, 247, 255, 0.8);
-  background: linear-gradient(135deg, rgba(0, 247, 255, 0.3), rgba(110, 0, 255, 0.3));
+  background: linear-gradient(135deg, #00f7ff, #6e00ff);
   box-shadow: 0 0 15px rgba(0, 247, 255, 0.4);
 }
 
 /* Dropdown Avatar Styles */
-.nav-dropdown-avatar.nav-avatar-icon {
-  background: linear-gradient(135deg, rgba(0, 247, 255, 0.15), rgba(110, 0, 255, 0.15));
+.nav-dropdown-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   border: 2px solid rgba(0, 247, 255, 0.3);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* For dropdown avatar images */
+.nav-dropdown-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: none;
+}
+
+/* For dropdown avatar icons (text-based) */
+.nav-dropdown-avatar.nav-avatar-icon {
+  background: linear-gradient(135deg, #6e00ff, #00f7ff);
+  border: 2px solid rgba(0, 247, 255, 0.3);
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .nav-username {
@@ -150,6 +191,7 @@
 .nav-dropdown-arrow {
   color: var(--text-muted, #888);
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .nav-dropdown-arrow.rotated {
@@ -193,14 +235,6 @@
   padding: 0 1rem 1rem 1rem;
 }
 
-.nav-dropdown-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid rgba(0, 247, 255, 0.3);
-  object-fit: cover;
-}
-
 .nav-user-details {
   flex: 1;
 }
@@ -216,6 +250,7 @@
   font-size: 0.85rem;
   color: var(--text-muted, #888);
   margin-bottom: 0.25rem;
+  word-break: break-word;
 }
 
 .nav-user-level {
@@ -225,6 +260,7 @@
   padding: 0.2rem 0.5rem;
   border-radius: 10px;
   display: inline-block;
+  font-weight: 600;
 }
 
 /* Divider */
@@ -255,6 +291,7 @@
   width: 100%;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
+  text-align: left;
 }
 
 .nav-dropdown-item:hover {
@@ -266,6 +303,7 @@
 .nav-dropdown-item svg {
   color: var(--text-muted, #888);
   transition: color 0.2s ease;
+  flex-shrink: 0;
 }
 
 .nav-dropdown-item:hover svg {
@@ -291,6 +329,40 @@
 
 .nav-logout-btn:hover svg {
   color: #ff4757;
+}
+
+/* Image Error Handling */
+.nav-profile-image-container {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.nav-dropdown-avatar-container {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Loading animation for images */
+@keyframes avatarPulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.nav-avatar-loading {
+  animation: avatarPulse 1.5s ease-in-out infinite;
 }
 
 /* Responsive Design */
@@ -387,3 +459,27 @@
     font-size: 0.85rem;
   }
 }
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .nav-avatar-icon {
+    background: linear-gradient(135deg, #6e00ff, #00f7ff);
+  }
+  
+  .nav-dropdown-avatar.nav-avatar-icon {
+    background: linear-gradient(135deg, #6e00ff, #00f7ff);
+  }
+}
+
+/* Accessibility improvements */
+.nav-profile-button:focus,
+.nav-dropdown-item:focus {
+  outline: 2px solid var(--accent-color, #00f7ff);
+  outline-offset: 2px;
+}
+
+.nav-dropdown-item:focus {
+  background: rgba(0, 247, 255, 0.1);
+  color: var(--accent-color, #00f7ff);
+}
+

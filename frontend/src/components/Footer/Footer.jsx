@@ -13,16 +13,18 @@ const Footer = () => {
         </div>
         <div className="footer-column">
           <h4>Games</h4>
-          <a href="/wordle">Neuro Wordle</a>
-          <a href="/memory-matrix">Memory Matrix</a>
-          <a href="/sequence-master">Sequence Master</a>
+         <a href="/wordle-instructions">Wordle</a>
+          <a href="/chess-instructions">Chess</a>
+          <a href="/game2048-instructions">2048</a>
+          <a href="/simon-instruction">Simon Says</a>
         </div>
-        <div className="footer-column">
-          <h4>Resources</h4>
-          <a href="/blog">Memory Tips</a>
-          <a href="/research">The Science</a>
-          <a href="/faq">FAQ</a>
-        </div>
+      <div className="footer-column">
+  <h4>How to Play</h4>
+  <a href="/wordle-instructions">Wordle Rules</a>
+  <a href="/chess-instructions">Chess Rules</a>
+  <a href="/game2048-instructions">2048 Rules</a>
+  <a href="/simon-instruction">Simon Rules</a>
+</div>
       </div>
 
       <div className="footer-bottom">

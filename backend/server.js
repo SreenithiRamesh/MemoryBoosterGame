@@ -187,22 +187,107 @@ const gameScoreSchema = new mongoose.Schema({
 
 const GameScore = mongoose.model('GameScore', gameScoreSchema);
 
-// Authentication Middleware
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ message: 'Access token required' });
+// Game Session Schema - Compatible with your dashboard
+const gameSessionSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  gameType: {
+    type: String,
+    required: true,
+    enum: ['chess', 'wordle', 'simon', '2048']
+  },
+  score: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  duration: {
+    type: Number, // in seconds
+    required: true
+  },
+  moves: {
+    type: Number,
+    default: 0
+  },
+  level: {
+    type: Number,
+    default: 1
+  },
+  completed: {
+    type: Boolean,
+    default: true
+  },
+  difficulty: {
+    type: String,
+    enum: ['easy', 'medium', 'hard'],
+    default: 'medium'
+  },
+  gameData: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {}
   }
+}, {
+  timestamps: true
+});
 
-  jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key', (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid or expired token' });
-    }
-    req.user = user;
-    next();
+// Virtual for formatted date
+gameSessionSchema.virtual('formattedDate').get(function() {
+  return this.createdAt.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
   });
+});
+
+const GameSession = mongoose.model('GameSession', gameSessionSchema);
+
+// Authentication Middleware - Updated to match dashboard expectations
+const authenticateToken = async (req, res, next) => {
+  try {
+    // Get token from header
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+    if (!token) {
+      return res.status(401).json({ message: 'Access token required' });
+    }
+
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    
+    // Get user from token
+    const user = await User.findById(decoded.userId).select('-password');
+    
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+
+    // Add user to request object - compatible with dashboard
+    req.user = {
+      id: user._id,
+      userId: user._id,
+      email: user.email,
+      username: user.username
+    };
+    next();
+  } catch (error) {
+    console.error('Auth middleware error:', error);
+    
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+    
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Token expired' });
+    }
+    
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 
 // ROUTES
@@ -330,6 +415,235 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Helper function to calculate user statistics
+const calculateUserStats = (sessions) => {
+  if (!sessions.length) {
+    return {
+      totalGames: 0,
+      bestScores: { chess: 0, wordle: 0, simon: 0, '2048': 0 },
+      averageScores: { chess: 0, wordle: 0, simon: 0, '2048': 0 },
+      totalPlayTime: 0,
+      gamesPerType: { chess: 0, wordle: 0, simon: 0, '2048': 0 }
+    };
+  }
+
+  const gameTypes = ['chess', 'wordle', 'simon', '2048'];
+  const bestScores = {};
+  const averageScores = {};
+  const gamesPerType = {};
+  
+  gameTypes.forEach(type => {
+    const typeSessions = sessions.filter(s => s.gameType === type);
+    gamesPerType[type] = typeSessions.length;
+    
+    if (typeSessions.length > 0) {
+      bestScores[type] = Math.max(...typeSessions.map(s => s.score));
+      averageScores[type] = Math.round(
+        typeSessions.reduce((sum, s) => sum + s.score, 0) / typeSessions.length
+      );
+    } else {
+      bestScores[type] = 0;
+      averageScores[type] = 0;
+    }
+  });
+
+  const totalPlayTime = sessions.reduce((sum, session) => sum + session.duration, 0);
+
+  return {
+    totalGames: sessions.length,
+    bestScores,
+    averageScores,
+    totalPlayTime: Math.round(totalPlayTime / 60), // convert to minutes
+    gamesPerType
+  };
+};
+
+// Helper function to get progress data for charts
+const getProgressData = (sessions) => {
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
+  
+  const recentSessions = sessions.filter(session => 
+    new Date(session.createdAt) >= thirtyDaysAgo
+  );
+
+  // Group by date
+  const dailyData = {};
+  recentSessions.forEach(session => {
+    const date = new Date(session.createdAt).toISOString().split('T')[0];
+    if (!dailyData[date]) {
+      dailyData[date] = {
+        date,
+        games: 0,
+        totalScore: 0,
+        averageScore: 0
+      };
+    }
+    dailyData[date].games++;
+    dailyData[date].totalScore += session.score;
+  });
+
+  // Calculate averages and convert to array
+  const progressArray = Object.values(dailyData).map(day => ({
+    ...day,
+    averageScore: Math.round(day.totalScore / day.games)
+  })).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  return progressArray;
+};
+
+// Main Dashboard Route - Fixed and Updated
+app.get('/api/dashboard', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    
+    // Get user info
+    const user = await User.findById(userId).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Get all user's game sessions
+    const allSessions = await GameSession.find({ userId })
+      .sort({ createdAt: -1 });
+
+    // Calculate user stats
+    const stats = calculateUserStats(allSessions);
+
+    // Get recent activity (last 10 games)
+    const recentActivity = allSessions.slice(0, 10).map(session => ({
+      gameType: session.gameType,
+      score: session.score,
+      duration: session.duration,
+      date: session.createdAt.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
+      completed: session.completed
+    }));
+
+    // Get progress data for charts (last 30 days)
+    const progressData = getProgressData(allSessions);
+
+    res.json({
+      user: {
+        username: user.username,
+        email: user.email,
+        profileImage: user.profileImage,
+        level: user.level || 1
+      },
+      stats,
+      recentActivity,
+      progressData
+    });
+
+  } catch (error) {
+    console.error('Dashboard error:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Dashboard Stats Route
+app.get('/api/dashboard/stats', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    
+    const sessions = await GameSession.find({ userId });
+    const stats = calculateUserStats(sessions);
+    
+    res.json(stats);
+  } catch (error) {
+    console.error('Stats error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Dashboard Recent Games Route
+app.get('/api/dashboard/recent', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const limit = parseInt(req.query.limit) || 10;
+    
+    const recentGames = await GameSession.find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(limit);
+    
+    const formattedGames = recentGames.map(game => ({
+      gameType: game.gameType,
+      score: game.score,
+      duration: game.duration,
+      date: game.createdAt.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
+      completed: game.completed
+    }));
+    
+    res.json(formattedGames);
+  } catch (error) {
+    console.error('Recent games error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Save Game Session Route - Updated
+app.post('/api/dashboard/game-session', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { gameType, score, duration, moves, level, gameData, difficulty } = req.body;
+
+    // Validate required fields
+    if (!gameType || score === undefined || !duration) {
+      return res.status(400).json({ 
+        message: 'Missing required fields: gameType, score, duration' 
+      });
+    }
+
+    const newSession = new GameSession({
+      userId,
+      gameType,
+      score,
+      duration,
+      moves: moves || 0,
+      level: level || 1,
+      difficulty: difficulty || 'medium',
+      gameData: gameData || {}
+    });
+
+    await newSession.save();
+
+    // Update user stats
+    const user = await User.findById(userId);
+    if (user) {
+      user.gameStats[gameType === '2048' ? 'game2048' : gameType].gamesPlayed += 1;
+      if (gameType === 'simon' || gameType === '2048') {
+        const gameStatKey = gameType === '2048' ? 'game2048' : gameType;
+        if (score > user.gameStats[gameStatKey].highScore) {
+          user.gameStats[gameStatKey].highScore = score;
+        }
+      }
+      user.totalScore += score;
+      user.level = Math.floor(user.totalScore / 1000) + 1;
+      await user.save();
+    }
+
+    res.status(201).json({
+      message: 'Game session saved successfully',
+      session: newSession
+    });
+
+  } catch (error) {
+    console.error('Save game session error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Get User Profile Route
 app.get('/api/user/profile', authenticateToken, async (req, res) => {
   try {
@@ -389,7 +703,8 @@ app.post('/api/game/score', authenticateToken, async (req, res) => {
     }
 
     // Update game-specific stats
-    const gameStats = user.gameStats[gameType];
+    const gameStatKey = gameType === '2048' ? 'game2048' : gameType;
+    const gameStats = user.gameStats[gameStatKey];
     gameStats.gamesPlayed += 1;
 
     // Game-specific updates
@@ -441,7 +756,7 @@ app.post('/api/game/score', authenticateToken, async (req, res) => {
 
     res.json({
       message: '🎯 Score updated successfully!',
-      newStats: user.gameStats[gameType],
+      newStats: user.gameStats[gameStatKey],
       totalScore: user.totalScore,
       level: user.level
     });
@@ -511,7 +826,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-// 404 handler - FIXED: Removed the problematic '*' pattern
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({ 
     message: 'API endpoint not found',
@@ -521,7 +836,11 @@ app.use((req, res) => {
       'POST /api/auth/login',
       'GET /api/user/profile',
       'POST /api/game/score',
-      'GET /api/leaderboard/:gameType'
+      'GET /api/leaderboard/:gameType',
+      'GET /api/dashboard',
+      'GET /api/dashboard/stats',
+      'GET /api/dashboard/recent',
+      'POST /api/dashboard/game-session'
     ]
   });
 });
@@ -531,4 +850,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Memory Booster Backend running on port ${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api`);
   console.log(`🎮 Ready to serve your gaming website!`);
+  console.log(`🎯 Dashboard API: http://localhost:${PORT}/api/dashboard`);
 });
