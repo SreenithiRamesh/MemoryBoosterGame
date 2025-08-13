@@ -162,6 +162,12 @@ MemoryBoosterGame/
 - LinkedIn: [https://www.linkedin.com/in/sreenithi28/]
 - Email: [sreenithiramesh2@gmail.com]
 
+  **Janani Sindhu**
+- GitHub: [@Janani Sindhu](https://github.com/SreenithiRamesh)
+- LinkedIn: [https://www.linkedin.com/in/sreenithi28/]
+- Email: [sreenithiramesh2@gmail.com]
+  
+
 ---
 
 ## 🙏 Acknowledgments
