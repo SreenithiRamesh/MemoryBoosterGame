@@ -211,7 +211,7 @@ const AIAssistant = ({ gameState, onGameAction }) => {
 
   return (
     <div className="ai-assistant-container">
-      {/* Closed State with Professional Attention Grabber */}
+    
       {!isOpen && showAttention && (
         <div 
           className="attention-grabber"

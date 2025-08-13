@@ -4,11 +4,11 @@ import { FaBrain, FaGamepad, FaChartLine, FaUsers, FaMedal, FaLock } from 'react
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import AIAssistant from '../../components/AIAssistant';
-import Navigation from '../../components/Navigation/Navigation'; // Import the new Navigation component
+import Navigation from '../../components/Navigation/Navigation'; 
 
 const Home = () => {
   useEffect(() => {
-    // Main Intersection Observer for scroll animations
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -21,7 +21,6 @@ const Home = () => {
       observer.observe(el);
     });
 
-    // Number counter animation
     const animateNumbers = () => {
       const numberElements = document.querySelectorAll('.home-stat-number');
       
@@ -42,14 +41,13 @@ const Home = () => {
         }, 16);
       });
 
-      // Animate progress bars
+
       document.querySelectorAll('.home-progress-fill').forEach(bar => {
         const targetWidth = bar.parentElement.previousElementSibling.getAttribute('data-target') + '%';
         bar.style.width = targetWidth;
       });
     };
 
-    // Stats observer with higher threshold
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -72,7 +70,7 @@ const Home = () => {
   return (
     <div className="relative">
     <div className="home-page">
-      {/* Video Background */}
+
       <div className="home-video-background">
       <video autoPlay loop muted playsInline poster="/images/video-fallback.jpg">
           <source
@@ -89,7 +87,6 @@ const Home = () => {
         <div className="home-overlay"></div>
       </div>
 
-      {/* Replace the hardcoded header with the Navigation component */}
       <Navigation />
 
       

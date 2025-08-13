@@ -1,4 +1,4 @@
-// models/User.js - Fixed with proper model compilation check
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
   },
   totalPlayTime: {
     type: Number,
-    default: 0 // in seconds
+    default: 0
   },
   lastLogin: {
     type: Date,
@@ -113,16 +113,14 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Index for better performance
 userSchema.index({ email: 1 });
 userSchema.index({ username: 1 });
 
-// Hash password before saving
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
-  
+
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -132,45 +130,44 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-// Method to compare password
-userSchema.methods.comparePassword = async function(candidatePassword) {
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Method to update game stats
-userSchema.methods.updateGameStats = function(gameType, score) {
+userSchema.methods.updateGameStats = function (gameType, score) {
   if (this.gameStats[gameType]) {
     this.gameStats[gameType].gamesPlayed += 1;
     this.gameStats[gameType].totalScore += score;
-    
+
     if (score > this.gameStats[gameType].bestScore) {
       this.gameStats[gameType].bestScore = score;
     }
-    
+
     this.gameStats[gameType].averageScore = Math.round(
       this.gameStats[gameType].totalScore / this.gameStats[gameType].gamesPlayed
     );
   }
-  
+
   this.gamesPlayed += 1;
 };
 
-// Method to calculate level based on XP
-userSchema.methods.calculateLevel = function() {
-  // Simple level calculation: level = floor(XP / 1000) + 1
+
+userSchema.methods.calculateLevel = function () {
+
   this.level = Math.floor(this.totalXP / 1000) + 1;
 };
 
-// Method to add XP and update level
-userSchema.methods.addXP = function(xp) {
+
+userSchema.methods.addXP = function (xp) {
   this.totalXP += xp;
   this.calculateLevel();
 };
 
-// Method to unlock achievement
-userSchema.methods.unlockAchievement = function(type, gameType = null) {
+
+userSchema.methods.unlockAchievement = function (type, gameType = null) {
   const existingAchievement = this.achievements.find(ach => ach.type === type && ach.gameType === gameType);
-  
+
   if (!existingAchievement) {
     this.achievements.push({
       type,
@@ -180,17 +177,16 @@ userSchema.methods.unlockAchievement = function(type, gameType = null) {
   }
 };
 
-// Virtual for user's current streak (you can implement this based on your logic)
-userSchema.virtual('currentStreak').get(function() {
-  // This would require checking recent game sessions
-  // For now, return a default value
+
+userSchema.virtual('currentStreak').get(function () {
+
   return 5;
 });
 
-// Virtual for total achievements count
-userSchema.virtual('totalAchievements').get(function() {
+
+userSchema.virtual('totalAchievements').get(function () {
   return this.achievements.length;
 });
 
-// FIXED: Check if model exists before creating it to prevent OverwriteModelError
+
 module.exports = mongoose.models.User || mongoose.model('User', userSchema);

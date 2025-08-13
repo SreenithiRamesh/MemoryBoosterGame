@@ -19,7 +19,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Existing Routes */}
+      
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginRegister />} />
         <Route path="/Games" element={<Gamelisting />} />
@@ -45,8 +45,7 @@ export default function App() {
         <Route path="/chess-instructions" element={<ChessInstructions />} />
         <Route path="/wordle-instructions" element={<WordleInstruction />} />
 
-      
-        {/* Legacy Route Redirects */}
+ 
         <Route path="/play" element={<Navigate to="/wordle" replace />} />
         <Route path="/level" element={<Navigate to="/wordle-levels" replace />} />
       </Routes>

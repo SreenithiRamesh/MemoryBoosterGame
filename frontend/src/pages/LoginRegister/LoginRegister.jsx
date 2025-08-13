@@ -24,7 +24,7 @@ const LoginRegister = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    // Clear error when user starts typing
+ 
     if (error) setError('');
   };
 
@@ -34,7 +34,6 @@ const LoginRegister = () => {
     setError('');
     setSuccess('');
 
-    // Frontend validation
     if (!isLogin) {
       if (formData.password !== formData.confirmPassword) {
         setError('Passwords do not match!');
@@ -99,14 +98,14 @@ const LoginRegister = () => {
 
   const socialLogin = (provider) => {
     setError('');
-    // Placeholder for social login implementation
+
     setError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login not implemented yet`);
   };
 
   const showForgotPassword = () => {
     const email = prompt('Enter your email address to reset password:');
     if (email) {
-      // TODO: Implement password reset
+   
       setSuccess(`Password reset functionality will be implemented soon. Email: ${email}`);
     }
   };
@@ -125,7 +124,7 @@ const LoginRegister = () => {
     setSuccess('');
   };
 
-  // Particle animation (unchanged)
+
   const createFloatingParticle = () => {
     const particle = document.createElement('div');
     particle.style.position = 'fixed';

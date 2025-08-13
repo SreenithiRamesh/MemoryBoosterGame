@@ -1,9 +1,9 @@
-// src/firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 
-// Your Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyBRnzmbMXMuYo0p8IopC2uBJQQ4tOd83dc",
   authDomain: "wordledaily-74f4f.firebaseapp.com",
@@ -15,14 +15,10 @@ const firebaseConfig = {
   measurementId: "G-4GFL6P59SZ"
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 
-// Initialize services
-export const db = getFirestore(app);       // Firestore (for daily words)
-export const rtdb = getDatabase(app);     // Realtime DB (for leaderboard)
-
-// Optional: Analytics (remove if unused)
-// const analytics = getAnalytics(app);
+export const db = getFirestore(app);       
+export const rtdb = getDatabase(app);    
 
 

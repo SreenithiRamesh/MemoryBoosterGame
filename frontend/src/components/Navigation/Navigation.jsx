@@ -1,4 +1,4 @@
-// Navigation.jsx - Fixed with better error handling and fallbacks
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navigation.css';
@@ -8,7 +8,7 @@ const Navigation = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Check authentication status on component mount
+
   useEffect(() => {
     const checkAuth = () => {
       const token = localStorage.getItem('token');
@@ -20,7 +20,7 @@ const Navigation = () => {
           setUser(parsedUser);
         } catch (error) {
           console.error('Error parsing user data:', error);
-          // Clear invalid data
+         
           localStorage.removeItem('token');
           localStorage.removeItem('user');
         }
@@ -29,25 +29,25 @@ const Navigation = () => {
 
     checkAuth();
     
-    // Listen for storage changes (when user logs in/out in another tab)
+   
     window.addEventListener('storage', checkAuth);
     
     return () => window.removeEventListener('storage', checkAuth);
   }, []);
 
   const handleLogout = useCallback(() => {
-    // Clear localStorage
+
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     
-    // Update state
+   
     setUser(null);
     setIsDropdownOpen(false);
     
-    // Redirect to home
+
     navigate('/');
     
-    // Show success message (optional)
+    
     setTimeout(() => {
       alert('Logged out successfully!');
     }, 100);
@@ -57,7 +57,7 @@ const Navigation = () => {
     setIsDropdownOpen(prev => !prev);
   }, []);
 
-  // Close dropdown when clicking outside
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.nav-profile-dropdown')) {
@@ -71,9 +71,9 @@ const Navigation = () => {
     }
   }, [isDropdownOpen]);
 
-  // Avatar Icon Component - Enhanced with better styling
+  
   const AvatarIcon = ({ size = 32, className = "", username = "" }) => {
-    // Generate initial from username
+  
     const initial = username ? username.charAt(0).toUpperCase() : '?';
     
     return (
@@ -97,7 +97,7 @@ const Navigation = () => {
     );
   };
 
-  // Profile Image Component with multiple fallback options
+
   const ProfileImage = ({ src, alt, size = 32, className = "", username = "" }) => {
     const [imageError, setImageError] = useState(false);
     const [imageLoading, setImageLoading] = useState(!!src);
@@ -113,7 +113,7 @@ const Navigation = () => {
       setImageError(false);
     }, []);
 
-    // Reset error state when src changes
+    
     useEffect(() => {
       if (src) {
         setImageError(false);
@@ -121,7 +121,7 @@ const Navigation = () => {
       }
     }, [src]);
 
-    // If no src provided or image failed to load, show avatar icon
+    
     if (!src || imageError) {
       return <AvatarIcon size={size} className={className} username={username} />;
     }
@@ -157,12 +157,12 @@ const Navigation = () => {
     );
   };
 
-  // Generate a fallback avatar URL using UI Avatars service
+ 
   const generateFallbackAvatar = (username, size = 40) => {
     if (!username) return null;
     
     try {
-      // Using UI Avatars as a more reliable service
+     
       const name = encodeURIComponent(username);
       return `https://ui-avatars.com/api/?name=${name}&size=${size}&background=6e00ff&color=ffffff&bold=true`;
     } catch (error) {
@@ -179,7 +179,7 @@ const Navigation = () => {
         <Link to="/Games" className="home-nav-link">Games</Link>
         
         {user ? (
-          // Authenticated Navigation
+     
           <div className="nav-profile-dropdown">
             <button 
               className="nav-profile-button"
@@ -244,7 +244,7 @@ const Navigation = () => {
             )}
           </div>
         ) : (
-          // Unauthenticated Navigation
+         
           <Link to="/login" className="home-nav-link nav-login-register">
             Login / Register
           </Link>

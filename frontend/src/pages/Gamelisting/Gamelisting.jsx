@@ -14,7 +14,7 @@ const games = [
     icon: 'W',
     difficulty: 'Medium',
     players: '1 Player',
-    link: '/wordle-instructions'  // Add this
+    link: '/wordle-instructions'  
   },
   {
     id: 'chess',
@@ -26,7 +26,7 @@ const games = [
     icon: '♛',
     difficulty: 'Expert',
     players: '2 Players',
-    link: '/chess-instructions'  // Add this
+    link: '/chess-instructions' 
   },
   {
     id: '2048',
@@ -38,7 +38,7 @@ const games = [
     icon: '2048',
     difficulty: 'Hard',
     players: '1 Player',
-    link: '/game2048-instructions'  // Add this
+    link: '/game2048-instructions'  
   },
   {
     id: 'simon',
@@ -50,7 +50,7 @@ const games = [
     icon: '●',
     difficulty: 'Easy',
     players: '1 Player',
-    link: '/simon-instruction'  // Add this
+    link: '/simon-instruction'
   }
 ];
 
@@ -330,7 +330,7 @@ const games = [
     }
   };
 
-  // CSS animations
+
   const cssAnimations = `
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -358,7 +358,7 @@ const games = [
     }
   `;
 
-  // Grid patterns for each game
+
   const renderBackgroundPattern = (gameId) => {
     if (gameId === 'wordle') {
       return (
@@ -445,7 +445,7 @@ const games = [
                   </div>
                 </div>
                 <Link 
-  to={game.link}  // Use the link from the game object
+  to={game.link}  
   className="play-button"
   style={styles.playButton(game)}
 >

@@ -12,13 +12,13 @@ export class ChessAI {
     
     if (moves.length === 0) return null;
     
-    // Advanced evaluation with positional bonuses
+ 
     const evaluateBoard = (game) => {
       const pieceValues = {
         p: 100, n: 320, b: 330, r: 500, q: 900, k: 20000
       };
       
-      // Positional bonuses
+   
       const pawnEval = [
         [0,  0,  0,  0,  0,  0,  0,  0],
         [50, 50, 50, 50, 50, 50, 50, 50],
