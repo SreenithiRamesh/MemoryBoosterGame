@@ -156,16 +156,16 @@ MemoryBoosterGame/
 - 🎯 **Future**: Mobile app development
 
 ---
-
-**Sreenathi Ramesh**
+**Authors**
+**Sreenithi Ramesh**
 - GitHub: [@SreenithiRamesh](https://github.com/SreenithiRamesh)
 - LinkedIn: [https://www.linkedin.com/in/sreenithi28/]
 - Email: [sreenithiramesh2@gmail.com]
 
-  **Janani Sindhu**
-- GitHub: [@Janani Sindhu](https://github.com/SreenithiRamesh)
-- LinkedIn: [https://www.linkedin.com/in/sreenithi28/]
-- Email: [sreenithiramesh2@gmail.com]
+**Janani Sindhu P**
+- GitHub: [@Janani Sindhu](https://github.com/JananiSindhu)
+- LinkedIn: [https://www.linkedin.com/in/janani-sindhu-a73788255/]
+- Email: [jananiprakash2010@gmail.com ]
   
 
 ---
