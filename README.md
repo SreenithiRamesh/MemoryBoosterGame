@@ -157,6 +157,7 @@ MemoryBoosterGame/
 
 ---
 **Authors**
+
 **Sreenithi Ramesh**
 - GitHub: [@SreenithiRamesh](https://github.com/SreenithiRamesh)
 - LinkedIn: [https://www.linkedin.com/in/sreenithi28/]
