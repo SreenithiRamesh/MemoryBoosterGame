@@ -14,7 +14,9 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-    process.env.CLIENT_URL
+    process.env.CLIENT_URL,
+     process.env.FRONTEND_URL,
+  'https://memoryboostergame-frontend.onrender.com'
   ].filter(Boolean),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
